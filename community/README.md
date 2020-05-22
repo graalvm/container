@@ -10,21 +10,21 @@ Further details can be found on [www.graalvm.org](https://www.graalvm.org).
 
 # How to use these images
 
-The images are intended for use in the **FROM** field of a downstream Dockerfile. For example, specify `FROM oracle/graalvm-ce:latest` or a version tag.
+The images are intended for use in the **FROM** field of a downstream Dockerfile. For example, specify `FROM docker.pkg.github.com/graalvm/container/community:latest` or a version tag.
 
 # Building the images
 
 For building a GraalVM Java 8 image use:
 
 ```
-docker build --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java8 -t oracle/graalvm-ce:<GraalVM Version>-java8 .
+docker build --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java8 -t docker.pkg.github.com/graalvm/container/community:<GraalVM Version>-java8 .
 ```
 
 For building GraalVM Java 11 amd64 and arm64 images use:
 
 ```
-docker buildx build --platform linux/amd64 --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java11 -t oracle/graalvm-ce:<GraalVM Version>-java11-amd64 --output=type=docker -f Dockerfile.java11 .
-docker buildx build --platform linux/arm64 --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java11 -t oracle/graalvm-ce:<GraalVM Version>-java11-arm64 --output=type=docker -f Dockerfile.java11 .
+docker buildx build --platform linux/amd64 --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java11 -t docker.pkg.github.com/graalvm/container/community:<GraalVM Version>-java11-amd64 --output=type=docker -f Dockerfile.java11 .
+docker buildx build --platform linux/arm64 --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java11 -t docker.pkg.github.com/graalvm/container/community:<GraalVM Version>-java11-arm64 --output=type=docker -f Dockerfile.java11 .
 ```
 
 # License
