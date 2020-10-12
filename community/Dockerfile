@@ -3,7 +3,7 @@
 # Copyright (c) 2015 Oracle and/or its affiliates. All rights reserved.
 #
 
-FROM oraclelinux:7-slim
+FROM oraclelinux:7-slim as graal
 
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg "https_proxy=..." --build-arg "http_proxy=..." --build-arg "no_proxy=..." ...
@@ -36,10 +36,14 @@ RUN set -eux \
     && ln -sfT "$JAVA_HOME" /usr/java/default \
     && ln -sfT "$JAVA_HOME" /usr/java/latest \
     && for bin in "$JAVA_HOME/bin/"*; do \
-        base="$(basename "$bin")"; \
-        [ ! -e "/usr/bin/$base" ]; \
-        alternatives --install "/usr/bin/$base" "$base" "$bin" 20000; \
+    base="$(basename "$bin")"; \
+    [ ! -e "/usr/bin/$base" ]; \
+    alternatives --install "/usr/bin/$base" "$base" "$bin" 20000; \
     done \
     && chmod +x /usr/local/bin/gu
 
 CMD java -version
+
+## add native-image target
+FROM graal as native-image
+RUN gu install native-image

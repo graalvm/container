@@ -1,7 +1,7 @@
 # Copyright (c) 2020 Oracle and/or its affiliates.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
 
-FROM oraclelinux:8-slim
+FROM oraclelinux:8-slim as graal
 
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg "https_proxy=..." --build-arg "http_proxy=..." --build-arg "no_proxy=..." ...
@@ -41,3 +41,7 @@ RUN set -eux \
     && chmod +x /usr/local/bin/gu
 
 CMD java -version
+
+## add native-image target
+FROM graal as native-image
+RUN gu install native-image
