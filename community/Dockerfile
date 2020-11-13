@@ -3,7 +3,7 @@
 # Copyright (c) 2015 Oracle and/or its affiliates. All rights reserved.
 #
 
-FROM oraclelinux:7-slim
+FROM oraclelinux:8-slim
 
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg "https_proxy=..." --build-arg "http_proxy=..." --build-arg "no_proxy=..." ...
