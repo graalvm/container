@@ -5,7 +5,13 @@ FROM oraclelinux:8-slim
 
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg "https_proxy=..." --build-arg "http_proxy=..." --build-arg "no_proxy=..." ...
-
+LABEL \
+    org.opencontainers.image.url='https://github.com/graalvm/container' \
+    org.opencontainers.image.source='https://github.com/graalvm/container/tree/master/community' \
+    org.opencontainers.image.title='GraalVM Community Edition' \
+    org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
+    org.opencontainers.image.description='GraalVM is a universal virtual machine for running applications written in JavaScript, Python, Ruby, R, JVM-based languages like Java, Scala, Clojure, Kotlin, and LLVM-based languages such as C and C++.'
+    
 RUN microdnf update -y oraclelinux-release-el8 \
     && microdnf --enablerepo ol8_codeready_builder install bzip2-devel ed gcc gcc-c++ gcc-gfortran gzip file fontconfig less libcurl-devel make openssl openssl-devel readline-devel tar \
     vi which xz-devel zlib-devel findutils glibc-static libstdc++ libstdc++-devel libstdc++-static zlib-static \
