@@ -26,4 +26,5 @@ RUN set -eux \
 ENV LANG=en_US.UTF-8 \
     PATH=/opt/truffleruby-$GRAALVM_VERSION-linux-amd64/bin:$PATH
 
-CMD ruby --version
+ENTRYPOINT [ "ruby" ]
+CMD ["--version"]

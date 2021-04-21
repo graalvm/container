@@ -28,4 +28,5 @@ ENV LANG=en_US.UTF-8 \
 RUN echo "gem: --no-document" > ~/.gemrc
 RUN /opt/truffleruby-$GRAALVM_VERSION-linux-amd64/lib/truffle/post_install_hook.sh
 
-CMD ruby --version
+ENTRYPOINT [ "ruby" ]
+CMD ["--version"]
