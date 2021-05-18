@@ -15,7 +15,7 @@ LABEL \
 ARG GRAALVM_VERSION=21.1.0
 
 RUN microdnf update -y oraclelinux-release-el8 \
-    && microdnf install -y zlib openssl gzip tar curl \
+    && microdnf install -y zlib openssl gzip tar curl glibc-langpack-en \
     && rm -rf /var/cache/yum
 
 RUN set -eux \
