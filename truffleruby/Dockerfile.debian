@@ -16,12 +16,15 @@ ARG GRAALVM_VERSION=21.3.0
 
 RUN set -eux \
     && apt-get update -y \
-    && apt-get install -y ca-certificates curl tar gzip libz-dev libssl-dev gcc make \
+    && apt-get install -y locales ca-certificates curl tar gzip libz-dev libssl-dev gcc make \
     && rm -rf /var/lib/apt/lists/*
 
 RUN set -eux \
     && curl --fail --silent --location --retry 3 https://github.com/oracle/truffleruby/releases/download/vm-$GRAALVM_VERSION/truffleruby-$GRAALVM_VERSION-linux-amd64.tar.gz \
     | gunzip | tar x -C /opt/
+
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
+    && locale-gen
 
 ENV LANG=en_US.UTF-8 \
     PATH=/opt/truffleruby-$GRAALVM_VERSION-linux-amd64/bin:$PATH
