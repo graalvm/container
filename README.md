@@ -3,7 +3,7 @@
 To support container-based development, GraalVM Community container images are published in the GitHub Container Registry for each release.
 
 There are different GraalVM Community container images provided depending on the architecture and the Java version.
-The images are multi-arch (aarch64 or amd64 will be pulled depending on Docker host architecture).
+The images are multi-arch (aarch64 or amd64 depending on the host architecture).
 You can find a complete GraalVM Community image, a compact image without additional features, or GraalVM Community image with specific features like the Node.js runtime.
 
 The images are tagged with the format `ghcr.io/OWNER/IMAGE_NAME:version`, where `OWNER` is the repository name, `graalvm` in this case, `IMAGE_NAME` is the package name.
