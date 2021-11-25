@@ -6,9 +6,7 @@ There are different GraalVM Community container images provided depending on the
 The images are multi-arch (`aarch64` or `amd64` depending on the host architecture).
 Some images are `gu`-based (containing the [GraalVM Updater](https://github.com/oracle/graal/blob/master/docs/reference-manual/graalvm-updater.md) tool), some are RPM-based.
 You can find complete images, compact images without additional features, or images with specific features included.
-All images allow to install extra features.
-
-You can find the following packages available:
+All images allow to install extra features. You can find the following packages available:
 
 | Package      | Description                                                                                                                                                | Type      |
 |--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
