@@ -17,7 +17,7 @@ All images allow to install extra features. You can find the following packages 
 | nodejs       | GraalVM Community compact image with the Node.js runtime.                                                                                                  | RMP-based |
 
 The images are tagged with the format `ghcr.io/graalvm/IMAGE_NAME:version`, where `IMAGE_NAME` is a package name.
-The version tag defines the level of specificity.
+The version tag defines the level of peculiarity.
 It is recommended to use the most specific tag, e.g., `java17-21.3.0` or `java17-21.3.0-b1`, where the
 `-b1` means the image required a patch and this specific build will never change.
 
