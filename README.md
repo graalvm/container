@@ -15,11 +15,10 @@ You can find the following packages available:
 
 | Package      | Description                                                                                                                                  |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| graalvm-ce   | GraalVM Community Edition image with GraalVM Updater which allows to install and manage additional features like Native Image, Node.js, etc. |
-| truffleruby  | GraalVM Community compact image with the Ruby runtime.                                                                                       |
-| native-image |  GraalVM Community compact image with Native Image.                                                                                          |
-| community    | GraalVM Community Edition image with GraalVM Updater which allows to install and manage additional features like Native Image, Node.js, etc. |
 | jdk          | GraalVM Community compact JDK container image without additional features.                                                                   |
+| community    | GraalVM Community Edition image with GraalVM Updater which allows to install and manage additional features like Native Image, Node.js, etc. |
+| native-image |  GraalVM Community compact image with Native Image.                                                                                          |
+| truffleruby  | GraalVM Community compact image with the Ruby runtime.                                                                                       |
 | nodejs       | GraalVM Community compact image with the Node.js runtime.                                                                                    |
 
 You can pull a package by name or by name and version tag.
