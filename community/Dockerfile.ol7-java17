@@ -1,9 +1,10 @@
 # LICENSE UPL 1.0
 #
-# Copyright (c) 2015 Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2021 Oracle and/or its affiliates. All rights reserved.
 #
 
-FROM oraclelinux:7-slim
+ARG OL_BASE=container-registry.oracle.com/os/oraclelinux:7-slim:7-slim
+FROM ${OL_BASE}
 
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg "https_proxy=..." --build-arg "http_proxy=..." --build-arg "no_proxy=..." ...
