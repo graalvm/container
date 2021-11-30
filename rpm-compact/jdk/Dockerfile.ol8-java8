@@ -1,0 +1,35 @@
+# LICENSE UPL 1.0
+#
+# Copyright (c) 2015 Oracle and/or its affiliates. All rights reserved.
+#
+
+FROM docker.dockerhub-phx.oci.oraclecorp.com/library/oraclelinux:8-slim
+
+# Note: If you are behind a web proxy, set the build variables for the build:
+#       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
+
+ARG GRAALVM_YEAR_VERSION=21
+ARG GRAALVM_MAJOR_VERSION=3
+ARG GRAALVM_MINOR_VERSION=0
+ARG GRAALVM_SUFFIX_VERSION
+ARG JAVA_VERSION=8
+ENV GRAALVM_VERSION=${GRAALVM_YEAR_VERSION}.${GRAALVM_MAJOR_VERSION}.${GRAALVM_MINOR_VERSION}${GRAALVM_SUFFIX_VERSION}
+ARG TARGETPLATFORM
+ARG PLATFORM
+
+RUN echo -e "\
+[ol8_graalvm_community]\n\
+name=Oracle Linux 8 graalvm community (\$basearch)\n\
+baseurl=https://yum.oracle.com/repo/OracleLinux/OL8/graalvm/community/\$basearch\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle\n\
+gpgcheck=1\n\
+enabled=1\
+" > /etc/yum.repos.d/ol8_graalvm_community.repo
+
+RUN microdnf --enablerepo ol8_codeready_builder install -y graalvm${GRAALVM_YEAR_VERSION}-ce-${JAVA_VERSION}-jdk-${GRAALVM_VERSION} \
+    && rm -rf /var/cache/yum
+
+ENV LANG=en_US.UTF-8 \
+    JAVA_HOME=/usr/lib64/graalvm/graalvm${GRAALVM_YEAR_VERSION}-ce-java${JAVA_VERSION}/
+
+CMD java --version
