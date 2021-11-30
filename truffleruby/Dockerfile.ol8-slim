@@ -12,7 +12,7 @@ LABEL \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='TruffleRuby is the GraalVM high-performance implementation of the Ruby programming language.'
 
-ARG GRAALVM_VERSION=21.1.0
+ARG GRAALVM_VERSION=21.3.0
 
 RUN microdnf update -y oraclelinux-release-el8 \
     && microdnf install -y zlib openssl gzip tar curl glibc-langpack-en \
@@ -20,11 +20,12 @@ RUN microdnf update -y oraclelinux-release-el8 \
 
 RUN set -eux \
     && curl --fail --silent --location --retry 3 https://github.com/oracle/truffleruby/releases/download/vm-$GRAALVM_VERSION/truffleruby-$GRAALVM_VERSION-linux-amd64.tar.gz \
-    | gunzip | tar x -C /opt/ \
-    && rm -rf /opt/truffleruby-$GRAALVM_VERSION-linux-amd64/lib/llvm-toolchain
+    | gunzip | tar x -C /opt/
 
 ENV LANG=en_US.UTF-8 \
     PATH=/opt/truffleruby-$GRAALVM_VERSION-linux-amd64/bin:$PATH
 
+RUN /opt/truffleruby-$GRAALVM_VERSION-linux-amd64/lib/truffle/post_install_hook.sh \
+    && rm -rf /opt/truffleruby-$GRAALVM_VERSION-linux-amd64/lib/llvm-toolchain
 
 CMD [ "irb" ]
