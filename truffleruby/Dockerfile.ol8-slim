@@ -3,7 +3,8 @@
 # Copyright (c) 2021 Oracle and/or its affiliates.
 #
 
-FROM oraclelinux:8-slim
+ARG OL_BASE=container-registry.oracle.com/os/oraclelinux:7-slim:8-slim
+FROM ${OL_BASE}
 
 LABEL \
     org.opencontainers.image.url='https://github.com/graalvm/container' \

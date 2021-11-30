@@ -58,7 +58,7 @@ The GraalVM CE Docker image uses [Oracle Linux](https://hub.docker.com/_/oraclel
 
 GraalVM CE 20 consists of multiple modules.  The GraalVM software as a whole, as well as the JVMCI and VisualVM modules, are released under version 2 of the GNU General Public License with the "Classpath" Exception.  See https://github.com/oracle/graal/blob/master/LICENSE.  The optionally available Ruby, R and Python language components are licensed under separate terms as specified in those packages. See https://github.com/oracle/graal/blob/master/README.md.  
 
-Copyright (c) 2015, 2018, Oracle and/or its affiliates. All rights reserved.
+Copyright (c) 2021, Oracle and/or its affiliates. All rights reserved.
 
 As with all Docker images, these likely also contain other software which may be under other licenses (such as Bash, etc from the base distribution, along with any direct or indirect dependencies of the primary software being contained).
 
