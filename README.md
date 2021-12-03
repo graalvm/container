@@ -17,7 +17,7 @@ All images support the installation of extra features. The following container i
 
 The images are tagged with the format `ghcr.io/graalvm/IMAGE_NAME:version`.
 The version tag defines the level of specificity.
-It is recommended to use the most specific tag, e.g., `java17-21.3.0` or `java17-21.3.0-b1`, where the `-b1` means the image required a patch and this specific build will never change.
+It is recommended that the most specific tag be used, e.g., `java17-21.3.0` or `java17-21.3.0-b1`, where the `-b1` means the image required a patch and this specific build will never change.
 
 You can pull a package by name or by name and version tag.
 To install GraalVM JDK from the command line, use:
