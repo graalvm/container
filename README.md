@@ -4,7 +4,7 @@ To support container-based development, GraalVM Community Edition container imag
 
 There are different GraalVM Community Edition container images provided depending on the architecture and the Java version.
 The images are multi-arch (`aarch64` or `amd64` depending on the host architecture).
-Some images are `gu`-based (containing the [GraalVM Updater](https://github.com/oracle/graal/blob/master/docs/reference-manual/graalvm-updater.md) tool), some are RPM-based.
+Some images are `GU`-based (containing the [GraalVM Updater](https://github.com/oracle/graal/blob/master/docs/reference-manual/graalvm-updater.md) tool), some are RPM-based.
 All images support the installation of extra features. The following container images are available:
 
 | Package      | Description                                                                                                                                                | Type      |
@@ -15,7 +15,7 @@ All images support the installation of extra features. The following container i
 | truffleruby  | A size compact GraalVM Community container image with the Ruby runtime. It uses a standalone build of [TruffleRuby](https://github.com/oracle/truffleruby/releases). | RPM-based<sup>1</sup> |
 | nodejs       | A size compact GraalVM Community container image with the [Node.js runtime](https://www.graalvm.org/reference-manual/js/NodeJS/).                          | RPM-based<sup>1</sup> |
 
-**1**: RPM-based GraalVM Community container images are based on GraalVM components RPMs that are available for Oracle Linux 7 and Oracle Linux 8. Similar to any other available packages, you can install these packages using `yum` on Oracle Linux 7 or `microdnf` on the Oracle Linux 8 based images.
+**1**: RPM-based GraalVM Community container images are based on GraalVM components RPMs that are available for Oracle Linux 7 and Oracle Linux 8. Similar to any other available packages, you can install these components using `yum` on Oracle Linux 7 or `microdnf` on the Oracle Linux 8 based images.
 
 The images are tagged with the format `ghcr.io/graalvm/IMAGE_NAME:version`.
 The version tag defines the level of specificity.
