@@ -9,11 +9,13 @@ All images support the installation of extra features. The following container i
 
 | Package      | Description                                                                                                                                                | Type      |
 |--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| jdk          | GraalVM Community compact JDK container image without additional features.                                                                                 | RPM-based |
-| graalvm-ce   | GraalVM Community Edition image with GraalVM Updater                                                                                                       | GU-based  |
-| native-image |  GraalVM Community compact image with Native Image.                                                                                                        | RPM-based |
-| truffleruby  | GraalVM Community compact image with the Ruby runtime. The image uses a standalone build of [TruffleRuby](https://github.com/oracle/truffleruby/releases). | RPM-based |
-| nodejs       | GraalVM Community compact image with the Node.js runtime.                                                                                                  | RPM-based |
+| jdk          | A size compact GraalVM Community container image with the GraalVM JDK pre-installed.                                                                       | RPM-based<sup>1</sup> |
+| graalvm-ce   | A GraalVM Community Edition container image with the [`gu` utility](https://www.graalvm.org/reference-manual/graalvm-updater/) to install additional features.                                                          | GU-based  |
+| native-image | A size compact GraalVM Community container image with the [Native Image](https://www.graalvm.org/reference-manual/native-image) support.                   | RPM-based<sup>1</sup> |
+| truffleruby  | A size compact GraalVM Community container image with the Ruby runtime. It uses a standalone build of [TruffleRuby](https://github.com/oracle/truffleruby/releases). | RPM-based<sup>1</sup> |
+| nodejs       | A size compact GraalVM Community container image with the [Node.js runtime](https://www.graalvm.org/reference-manual/js/NodeJS/).                          | RPM-based<sup>1</sup> |
+
+**1**: RPM-based GraalVM Community container images are based on GraalVM components RPMs that are available for Oracle Linux 7 and Oracle Linux 8. Similar to any other available packages, you can install these packages using `yum` on Oracle Linux 7 or `microdnf` on the Oracle Linux 8 based images.
 
 The images are tagged with the format `ghcr.io/graalvm/IMAGE_NAME:version`.
 The version tag defines the level of specificity.
