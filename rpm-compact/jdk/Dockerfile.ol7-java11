@@ -8,13 +8,12 @@ FROM container-registry.oracle.com/os/oraclelinux:7-slim
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
 
-ARG GRAALVM_YEAR_VERSION=21
-ARG GRAALVM_MAJOR_VERSION=3
-ARG GRAALVM_MINOR_VERSION=1
+ARG GRAALVM_YEAR_VERSION=22
+ARG GRAALVM_MAJOR_VERSION=1
+ARG GRAALVM_MINOR_VERSION=0
 ARG GRAALVM_SUFFIX_VERSION
 ARG JAVA_VERSION=11
 ARG GRAALVM_VERSION=${GRAALVM_YEAR_VERSION}.${GRAALVM_MAJOR_VERSION}.${GRAALVM_MINOR_VERSION}${GRAALVM_SUFFIX_VERSION}
-ARG TARGETPLATFORM
 
 ENV LANG=en_US.UTF-8 \
     JAVA_HOME=/usr/lib64/graalvm/graalvm${GRAALVM_YEAR_VERSION}-ce-java${JAVA_VERSION}

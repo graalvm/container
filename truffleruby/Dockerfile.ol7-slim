@@ -12,10 +12,10 @@ LABEL \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='TruffleRuby is the GraalVM high-performance implementation of the Ruby programming language.'
 
-ARG GRAALVM_VERSION=22.0.0.2
+ARG GRAALVM_VERSION=22.1.0
 
 RUN yum update -y oraclelinux-release-el7 \
-    && yum install -y zlib openssl tar curl gzip \
+    && yum install -y curl tar gzip zlib openssl-devel gcc make glibc-langpack-en \
     && rm -rf /var/cache/yum
 
 RUN set -eux \
