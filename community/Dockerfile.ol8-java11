@@ -33,7 +33,6 @@ RUN set -eux \
     && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then GRAALVM_PKG=${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64}; fi \
     && curl --fail --silent --location --retry 3 ${GRAALVM_PKG} \
     | gunzip | tar x -C /opt/ \
-
     # Set alternative links
     && mkdir -p "/usr/java" \
     && ln -sfT "$JAVA_HOME" /usr/java/default \
@@ -43,7 +42,6 @@ RUN set -eux \
     [ ! -e "/usr/bin/$base" ]; \
     alternatives --install "/usr/bin/$base" "$base" "$bin" 20000; \
     done \
-
     && chmod +x /usr/local/bin/gu
 
 CMD java -version

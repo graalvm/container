@@ -21,6 +21,7 @@ RUN yum update -y oraclelinux-release-el7 \
 RUN set -eux \
     && curl --fail --silent --location --retry 3 https://github.com/oracle/truffleruby/releases/download/vm-$GRAALVM_VERSION/truffleruby-$GRAALVM_VERSION-linux-amd64.tar.gz \
     | gunzip | tar x -C /opt/ \
+    && /opt/truffleruby-$GRAALVM_VERSION-linux-amd64/lib/truffle/post_install_hook.sh \
     && rm -rf /opt/truffleruby-$GRAALVM_VERSION-linux-amd64/lib/llvm-toolchain
 
 ENV LANG=en_US.UTF-8 \
