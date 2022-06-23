@@ -20,7 +20,28 @@ See https://github.com/graalvm/container/pkgs/container/truffleruby
 * Debian 10: [`debian`/`debian-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby/Dockerfile.debian).
 
 The `no toolchain` variants mean the GraalVM LLVM toolchain and its dependencies needed to install C extensions are not included to save space.
-It is still possible to use gems with C extensions, but the gems must be installed before for instance using a multi-stage build:
+It is still possible to use gems with C extensions, but the gems must be installed before for instance using a multi-stage build, see [Multi-stage build for the no-toolchain images](#multi-stage-build-for-the-no-toolchain-images) below.
+
+## How to use these images
+
+The images are intended for use in the **FROM** field of a downstream Dockerfile.  
+For example, specify `FROM ghcr.io/graalvm/truffleruby:latest` or another tag.
+
+Here is an example `Dockerfile`:
+```Dockerfile
+FROM ghcr.io/graalvm/truffleruby:latest
+
+# Copy app, Gemfile and Gemfile.lock
+COPY . /app
+WORKDIR /app
+
+RUN bundle config --local path vendor/bundle
+RUN bundle install
+RUN bundle exec ruby app.rb
+```
+
+### Multi-stage build for the no-toolchain images
+
 ```Dockerfile
 # Builder image with the toolchain to install gems
 FROM ghcr.io/graalvm/truffleruby:latest AS builder
@@ -40,11 +61,6 @@ WORKDIR /app
 
 RUN bundle exec ruby app.rb
 ```
-
-## How to use these images
-
-The images are intended for use in the **FROM** field of a downstream Dockerfile.  
-For example, specify `FROM ghcr.io/graalvm/truffleruby:latest` or a another tag.
 
 ## Installing system packages
 
