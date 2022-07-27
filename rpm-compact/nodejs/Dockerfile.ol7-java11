@@ -9,7 +9,7 @@ FROM container-registry.oracle.com/os/oraclelinux:7-slim
 #       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
 
 ARG GRAALVM_YEAR_VERSION=22
-ARG GRAALVM_MAJOR_VERSION=1
+ARG GRAALVM_MAJOR_VERSION=2
 ARG GRAALVM_MINOR_VERSION=0
 ARG GRAALVM_SUFFIX_VERSION
 ARG JAVA_VERSION=11
