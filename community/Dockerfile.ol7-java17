@@ -33,7 +33,7 @@ ARG TARGETPLATFORM
 ENV LANG=en_US.UTF-8 \
     JAVA_HOME=/opt/graalvm-ce-$JAVA_VERSION-$GRAALVM_VERSION
 
-ADD gu-wrapper.sh /usr/local/bin/gu
+COPY gu-wrapper.sh /usr/local/bin/gu
 RUN set -eux \
     && if [ "$TARGETPLATFORM" == "linux/amd64" ]; then GRAALVM_PKG=${GRAALVM_PKG/GRAALVM_ARCH/linux-amd64}; fi \
     && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then GRAALVM_PKG=${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64}; fi \
