@@ -14,7 +14,7 @@ All images support the installation of extra features. The following container i
 | native-image | A size compact GraalVM Community container image with the [Native Image](https://www.graalvm.org/reference-manual/native-image) support.                   | RPM-based<sup>1</sup> |
 | truffleruby  | A size compact GraalVM Community container image with the Ruby runtime. It uses a standalone build of [TruffleRuby](https://github.com/oracle/truffleruby/releases). | Standalone<sup>2</sup> |
 | nodejs       | A size compact GraalVM Community container image with the [Node.js runtime](https://www.graalvm.org/reference-manual/js/NodeJS/).                          | RPM-based<sup>1</sup> |
-| graalpy       | A size compact GraalVM Community container image with the [GraalPy runtime](https://www.graalvm.org/22.2/reference-manual/python/).                          | Standalone<sup>2</sup> |
+| graalpy       | A size compact GraalVM Community container image with the [GraalPy runtime](https://www.graalvm.org/reference-manual/python/).                          | Standalone<sup>2</sup> |
 
 **1**: RPM-based GraalVM Community container images are based on GraalVM components RPMs that are available for Oracle Linux 7, Oracle Linux 8 and Oracle Linux 9. Similar to any other available packages, you can install these components using `yum` on Oracle Linux 7 or `microdnf` on the Oracle Linux 8 and Oracle Linux 9 based images.
 
