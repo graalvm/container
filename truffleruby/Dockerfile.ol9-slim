@@ -3,7 +3,7 @@
 # Copyright (c) 2021, 2022 Oracle and/or its affiliates.
 #
 
-FROM container-registry.oracle.com/os/oraclelinux:7
+FROM container-registry.oracle.com/os/oraclelinux:9-slim
 
 LABEL \
     org.opencontainers.image.url='https://github.com/graalvm/container' \
@@ -23,16 +23,16 @@ ENV LANG=en_US.UTF-8 \
     PATH=/opt/truffleruby-$GRAALVM_VERSION/bin:$PATH
 
 RUN set -eux \
-    && echo "$TEMP_REGION" > /etc/yum/vars/ociregion \
-    && yum update -y oraclelinux-release-el7 \
-    && yum install -y curl tar gzip zlib openssl-devel gcc make glibc-langpack-en \
-    && echo "" > /etc/yum/vars/ociregion \
-    && rm -rf /var/cache/yum
+    && echo "$TEMP_REGION" > /etc/dnf/vars/ociregion \
+    && microdnf update -y oraclelinux-release-el9 \
+    && microdnf install -y curl tar gzip zlib openssl-devel gcc make glibc-langpack-en libxcrypt-compat \
+    && echo "" > /etc/dnf/vars/ociregion \
+    && rm -rf /var/cache/yum 
 
 RUN set -eux \
     && mkdir -p /opt/truffleruby-$GRAALVM_VERSION \
     && if [ "$TARGETPLATFORM" == "linux/amd64" ]; then (curl --fail --silent --location --retry 3 ${GRAALVM_PKG/GRAALVM_ARCH/linux-amd64} | gunzip | tar x -C /opt/truffleruby-$GRAALVM_VERSION --strip-components=1) && /opt/truffleruby-$GRAALVM_VERSION/lib/truffle/post_install_hook.sh; fi \
-    && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then (curl --fail --silent --location --retry 3 ${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64} | gunzip | tar x -C /opt/truffleruby-$GRAALVM_VERSION --strip-components=1) && /opt/truffleruby-$GRAALVM_VERSION/lib/truffle/post_install_hook.sh; fi 
-RUN echo "gem: --no-document" > ~/.gemrc
+    && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then (curl --fail --silent --location --retry 3 ${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64} | gunzip | tar x -C /opt/truffleruby-$GRAALVM_VERSION --strip-components=1) && /opt/truffleruby-$GRAALVM_VERSION/lib/truffle/post_install_hook.sh; fi \
+    && rm -rf /opt/truffleruby-$GRAALVM_VERSION/lib/llvm-toolchain
 
 CMD [ "irb" ]

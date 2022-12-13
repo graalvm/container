@@ -1,0 +1,35 @@
+# LICENSE UPL 1.0
+#
+# Copyright (c) 2015,2022 Oracle and/or its affiliates. All rights reserved.
+#
+
+FROM ghcr.io/graalvm/native-image:ol9-java17 as base
+
+FROM base as muslib
+
+ARG TEMP_REGION=""
+ENV TOOLCHAIN_DIR=/usr/local/musl \ 
+    CC=$TOOLCHAIN_DIR/bin/gcc 
+    
+RUN echo "$TEMP_REGION" > /etc/dnf/vars/ociregion \
+    && rm -rf /etc/yum.repos.d/ol9_graalvm_community.repo \
+    && mkdir -p $TOOLCHAIN_DIR \
+    && microdnf install -y wget tar gzip make \
+    && wget http://more.musl.cc/10/x86_64-linux-musl/x86_64-linux-musl-native.tgz && tar -xvf  x86_64-linux-musl-native.tgz -C $TOOLCHAIN_DIR --strip-components=1  \
+    && wget https://zlib.net/fossils/zlib-1.2.11.tar.gz && tar -xvf zlib-1.2.11.tar.gz \
+    && cd zlib-1.2.11 \
+    && ./configure --prefix=$TOOLCHAIN_DIR --static \
+    && make && make install 
+
+FROM base as final
+COPY --from=muslib /usr/local/musl /usr/local/musl
+
+RUN echo "" > /etc/dnf/vars/ociregion
+
+ENV TOOLCHAIN_DIR=/usr/local/musl \
+    CC=$TOOLCHAIN_DIR/bin/gcc 
+    
+ENV PATH=$TOOLCHAIN_DIR/bin:$PATH
+
+ENTRYPOINT [ "native-image" ]
+CMD [ "--version" ]
