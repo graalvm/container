@@ -3,12 +3,14 @@
 # Copyright (c) 2015, 2022 Oracle and/or its affiliates. All rights reserved.
 #
 
-FROM container-registry.oracle.com/os/oraclelinux:9-slim
+ARG BASE_IMAGE=container-registry.oracle.com/os/oraclelinux:9-slim
+
+FROM ${BASE_IMAGE}
 
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
 
-ARG GRAALVM_VERSION=22.3.0
+ARG GRAALVM_VERSION=22.3.1
 ARG GRAALVM_YEAR_VERSION=22
 ARG JAVA_VERSION=17
 ARG YUM_REPO=""

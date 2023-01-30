@@ -3,11 +3,18 @@
 # Copyright (c) 2015,2022 Oracle and/or its affiliates. All rights reserved.
 #
 
-FROM ghcr.io/graalvm/native-image:ol7-java11 as base
+ARG BASE_IMAGE=ghcr.io/graalvm/native-image:ol7-java11
+
+FROM ${BASE_IMAGE} as base
 
 FROM base as muslib
 
 ARG TEMP_REGION=""
+
+ARG MUSL_LOCATION=http://more.musl.cc/10/x86_64-linux-musl/x86_64-linux-musl-native.tgz
+
+ARG ZLIB_LOCATION=https://zlib.net/fossils/zlib-1.2.11.tar.gz
+
 ENV TOOLCHAIN_DIR=/usr/local/musl \ 
     CC=$TOOLCHAIN_DIR/bin/gcc 
     
@@ -15,13 +22,14 @@ RUN yum-config-manager --disable ol7_graalvm_community \
     && echo "$TEMP_REGION" > /etc/yum/vars/ociregion \
     && mkdir -p $TOOLCHAIN_DIR \
     && yum install -y wget tar gzip make gunzip \
-    && wget http://more.musl.cc/10/x86_64-linux-musl/x86_64-linux-musl-native.tgz && tar -xvf  x86_64-linux-musl-native.tgz -C $TOOLCHAIN_DIR --strip-components=1  \
-    && wget https://zlib.net/fossils/zlib-1.2.11.tar.gz && tar -xvf zlib-1.2.11.tar.gz \
+    && wget $MUSL_LOCATION && tar -xvf  x86_64-linux-musl-native.tgz -C $TOOLCHAIN_DIR --strip-components=1  \
+    && wget $ZLIB_LOCATION && tar -xvf zlib-1.2.11.tar.gz \
     && cd zlib-1.2.11 \
     && ./configure --prefix=$TOOLCHAIN_DIR --static \
     && make && make install 
 
 FROM base as final
+
 COPY --from=muslib /usr/local/musl /usr/local/musl
 
 RUN yum-config-manager --enable ol7_graalvm_community \

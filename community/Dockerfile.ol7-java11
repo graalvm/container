@@ -3,7 +3,9 @@
 # Copyright (c) 2021, 2022 Oracle and/or its affiliates. All rights reserved.
 #
 
-FROM container-registry.oracle.com/os/oraclelinux:7-slim
+ARG BASE_IMAGE=container-registry.oracle.com/os/oraclelinux:7-slim
+
+FROM ${BASE_IMAGE}
 
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg "https_proxy=..." --build-arg "http_proxy=..." --build-arg "no_proxy=..." ...
@@ -25,7 +27,7 @@ RUN yum update -y oraclelinux-release-el7 \
 
 RUN fc-cache -f -v
 
-ARG GRAALVM_VERSION=22.3.0
+ARG GRAALVM_VERSION=22.3.1
 ARG JAVA_VERSION=java11
 ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz
 ARG TARGETPLATFORM

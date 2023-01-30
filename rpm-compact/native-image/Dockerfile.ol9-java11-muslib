@@ -3,9 +3,17 @@
 # Copyright (c) 2015,2022 Oracle and/or its affiliates. All rights reserved.
 #
 
-FROM ghcr.io/graalvm/native-image:ol9-java11 as base
+ARG BASE_IMAGE=ghcr.io/graalvm/native-image:ol9-java11
+
+FROM ${BASE_IMAGE} as base
 
 FROM base as muslib
+
+ARG TEMP_REGION=""
+
+ARG MUSL_LOCATION=http://more.musl.cc/10/x86_64-linux-musl/x86_64-linux-musl-native.tgz
+
+ARG ZLIB_LOCATION=https://zlib.net/fossils/zlib-1.2.11.tar.gz
 
 ENV TOOLCHAIN_DIR=/usr/local/musl \ 
     CC=$TOOLCHAIN_DIR/bin/gcc 
@@ -14,8 +22,8 @@ RUN echo "$TEMP_REGION" > /etc/dnf/vars/ociregion \
     && rm -rf /etc/yum.repos.d/ol9_graalvm_community.repo \
     && mkdir -p $TOOLCHAIN_DIR \
     && microdnf install -y wget tar gzip make \
-    && wget http://more.musl.cc/10/x86_64-linux-musl/x86_64-linux-musl-native.tgz && tar -xvf  x86_64-linux-musl-native.tgz -C $TOOLCHAIN_DIR --strip-components=1  \
-    && wget https://zlib.net/fossils/zlib-1.2.11.tar.gz && tar -xvf zlib-1.2.11.tar.gz \
+    && wget $MUSL_LOCATION && tar -xvf  x86_64-linux-musl-native.tgz -C $TOOLCHAIN_DIR --strip-components=1  \
+    && wget $ZLIB_LOCATION && tar -xvf zlib-1.2.11.tar.gz \
     && cd zlib-1.2.11 \
     && ./configure --prefix=$TOOLCHAIN_DIR --static \
     && make && make install 
