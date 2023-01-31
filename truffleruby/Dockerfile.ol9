@@ -3,7 +3,7 @@
 # Copyright (c) 2021, 2022 Oracle and/or its affiliates.
 #
 
-ARG BASE_IMAGE=container-registry.oracle.com/os/oraclelinux:8
+ARG BASE_IMAGE=container-registry.oracle.com/os/oraclelinux:9
 
 FROM ${BASE_IMAGE}
 
@@ -26,8 +26,8 @@ ENV LANG=en_US.UTF-8 \
 
 RUN set -eux \
     && echo "$TEMP_REGION" > /etc/dnf/vars/ociregion \
-    && dnf update -y oraclelinux-release-el8 \
-    && dnf install -y curl tar gzip zlib openssl-devel gcc make glibc-langpack-en \
+    && dnf update -y oraclelinux-release-el9 \
+    && dnf install -y curl tar gzip zlib openssl-devel gcc make glibc-langpack-en libxcrypt-compat \
     && echo "" > /etc/dnf/vars/ociregion \
     && rm -rf /var/cache/yum \
     && mkdir -p /opt/truffleruby-$GRAALVM_VERSION \
