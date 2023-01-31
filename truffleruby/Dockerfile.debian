@@ -33,9 +33,9 @@ RUN set -eux \
 RUN set -eux \
     && mkdir -p /opt/truffleruby-$GRAALVM_VERSION \
     && if [ "$TARGETPLATFORM" == "linux/amd64" ]; then (curl --fail --silent --location --retry 3 ${GRAALVM_PKG/GRAALVM_ARCH/linux-amd64} | gunzip | tar x -C /opt/truffleruby-$GRAALVM_VERSION --strip-components=1) && /opt/truffleruby-$GRAALVM_VERSION/lib/truffle/post_install_hook.sh; fi \
-    && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then (curl --fail --silent --location --retry 3 ${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64} | gunzip | tar x -C /opt/truffleruby-$GRAALVM_VERSION --strip-components=1) && /opt/truffleruby-$GRAALVM_VERSION/lib/truffle/post_install_hook.sh; fi 
-RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
-    && locale-gen
-RUN echo "gem: --no-document" > ~/.gemrc
+    && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then (curl --fail --silent --location --retry 3 ${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64} | gunzip | tar x -C /opt/truffleruby-$GRAALVM_VERSION --strip-components=1) && /opt/truffleruby-$GRAALVM_VERSION/lib/truffle/post_install_hook.sh; fi \
+    sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
+    && locale-gen \
+    && echo "gem: --no-document" > ~/.gemrc
 
 CMD [ "irb" ]

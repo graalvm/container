@@ -3,8 +3,9 @@
 # Copyright (c) 2015,2022 Oracle and/or its affiliates. All rights reserved.
 #
 
+ARG GRAALVM_VERSION=22.3.1
 
-ARG BASE_IMAGE=ghcr.io/graalvm/native-image:ol7-java17
+ARG BASE_IMAGE=ghcr.io/graalvm/native-image:ol7-java17-GRAALVM_VERSION
 
 FROM ${BASE_IMAGE} as base
 
