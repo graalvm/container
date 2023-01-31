@@ -5,7 +5,7 @@
 
 ARG GRAALVM_VERSION=22.3.1
 
-ARG BASE_IMAGE=ghcr.io/graalvm/jdk:ol8-java17-GRAALVM_VERSION
+ARG BASE_IMAGE=ghcr.io/graalvm/jdk:ol8-java17-$GRAALVM_VERSION
 
 FROM ${BASE_IMAGE}
 
