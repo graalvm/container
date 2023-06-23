@@ -1,27 +1,27 @@
 
-# TruffleRuby
+# truffleruby-community
 
-TruffleRuby-community is the [GraalVM](http://graalvm.org/) high-performance implementation of the [Ruby programming language](https://www.ruby-lang.org/en/).  
+truffleruby-community is the [GraalVM](http://graalvm.org/) high-performance implementation of the [Ruby programming language](https://www.ruby-lang.org/en/).  
 
 ## Docker images
 
-See https://github.com/graalvm/container/pkgs/container/truffleruby
+See https://github.com/graalvm/container/pkgs/container/truffleruby-community
 
 ## Supported tags
 
-* Oracle Linux 9: [`latest`/`VERSION`](https://github.com/graalvm/container/blob/master/truffleruby/Dockerfile.ol9).
+* Oracle Linux 9: [`latest`/`VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.ol9).
 
-* Oracle Linux 9 no toolchain: [`slim`/`slim-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby/Dockerfile.ol9-slim).
+* Oracle Linux 9 no toolchain: [`slim`/`slim-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.ol9-slim).
 
-* Oracle Linux 8: [`latest`/`VERSION`](https://github.com/graalvm/container/blob/master/truffleruby/Dockerfile.ol8).  
+* Oracle Linux 8: [`latest`/`VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.ol8).  
 
-* Oracle Linux 8 no toolchain: [`slim`/`slim-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby/Dockerfile.ol8-slim).  
+* Oracle Linux 8 no toolchain: [`slim`/`slim-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.ol8-slim).  
 
-* Oracle Linux 7: [`ol7`/`ol7-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby/Dockerfile).  
+* Oracle Linux 7: [`ol7`/`ol7-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile).  
 
-* Oracle Linux 7 no toolchain: [`ol7-slim`/`ol7-slim-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby/Dockerfile.slim).  
+* Oracle Linux 7 no toolchain: [`ol7-slim`/`ol7-slim-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.slim).  
 
-* Debian 10: [`debian`/`debian-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby/Dockerfile.debian).
+* Debian 10: [`debian`/`debian-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.debian).
 
 The `no toolchain` variants mean the GraalVM LLVM toolchain and its dependencies needed to install C extensions are not included to save space.
 It is still possible to use gems with C extensions, but the gems must be installed before for instance using a multi-stage build, see [Multi-stage build for the no-toolchain images](#multi-stage-build-for-the-no-toolchain-images) below.
@@ -84,7 +84,7 @@ Use `apt update` and `apt install some-package`.
 
 #### Manually Building the images
 
-For manually building a TruffleRuby image from one of these Dockerfiles, use:
+For manually building a truffleruby-community image from one of these Dockerfiles, use:
 
 ```
 docker build --build-arg GRAALVM_VERSION=<GraalVM Version> -t ghcr.io/graalvm/truffleruby-community:TAG -f Dockerfile .

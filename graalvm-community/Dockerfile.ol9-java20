@@ -9,7 +9,7 @@ FROM ${BASE_IMAGE}
 #       E.g.:  docker build --build-arg "https_proxy=..." --build-arg "http_proxy=..." --build-arg "no_proxy=..." ...
 LABEL \
     org.opencontainers.image.url='https://github.com/graalvm/container' \
-    org.opencontainers.image.source='https://github.com/graalvm/container/tree/master/community' \
+    org.opencontainers.image.source='https://github.com/graalvm/container/tree/master/graalvm-community' \
     org.opencontainers.image.title='GraalVM Community Edition' \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='GraalVM is a universal virtual machine for running applications written in JavaScript, Python, Ruby, R, JVM-based languages like Java, Scala, Clojure, Kotlin, and LLVM-based languages such as C and C++.'
@@ -27,7 +27,7 @@ ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/j
 ARG TARGETPLATFORM
 
 ENV LANG=en_US.UTF-8 \
-    JAVA_HOME=/opt/graalvm-community-openjdk-${JDK_BUILD}
+    JAVA_HOME=/opt/graalvm-community-$JAVA_VERSION
 
 COPY gu-wrapper.sh /usr/local/bin/gu
 RUN set -eux \

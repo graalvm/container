@@ -7,6 +7,13 @@ ARG BASE_IMAGE=container-registry.oracle.com/os/oraclelinux:9-slim
 
 FROM ${BASE_IMAGE}
 
+LABEL \
+    org.opencontainers.image.url='https://github.com/graalvm/container' \
+    org.opencontainers.image.source='https://github.com/graalvm/container/tree/master/nodejs-community' \
+    org.opencontainers.image.title='Nodejs Community Edition' \
+    org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
+    org.opencontainers.image.description='GraalVM Node.js Community Edition runtime with the GraalVM JavaScript interpreter enabled as the JavaScript engine. It allows executing polyglot applications (e.g., using Java, R, Ruby or Python libraries), running Node.js with large heap configurations and Java’s garbage collectors, or using GraalVM’s interoperability to define data structures in C/C++ and use them from JavaScript.'
+
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
 

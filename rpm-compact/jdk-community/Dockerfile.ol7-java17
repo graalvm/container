@@ -7,6 +7,13 @@ ARG BASE_IMAGE=container-registry.oracle.com/os/oraclelinux:7-slim
 
 FROM ${BASE_IMAGE}
 
+LABEL \
+    org.opencontainers.image.url='https://github.com/graalvm/container' \
+    org.opencontainers.image.source='https://github.com/graalvm/container/tree/master/jdk-community' \
+    org.opencontainers.image.title='JDK Community Edition' \
+    org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
+    org.opencontainers.image.description='GraalVM Java Developer Kit contains a complete set of tools for Java applications development, such as debugger, profiler, and others.'
+
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
 

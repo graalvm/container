@@ -11,6 +11,13 @@ FROM ${BASE_IMAGE} as base
 
 FROM base as muslib
 
+LABEL \
+    org.opencontainers.image.url='https://github.com/graalvm/container' \
+    org.opencontainers.image.source='https://github.com/graalvm/container/tree/master/native-image-community' \
+    org.opencontainers.image.title='Native Image Community Edition' \
+    org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
+    org.opencontainers.image.description='GraalVM Native Image Community Edition ahead of time compilation functionality to generate under closed-world assumption an executable image or a shared object. This resulting binary includes the application, the libraries, the JDK and does not run on the Java VM, but includes necessary components like memory management and thread scheduling etc..'
+
 ARG TEMP_REGION=""
 
 ARG MUSL_LOCATION=http://more.musl.cc/10/x86_64-linux-musl/x86_64-linux-musl-native.tgz
