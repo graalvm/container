@@ -1,0 +1,56 @@
+# LICENSE UPL 1.0
+#
+# Copyright (c) 2023 Oracle and/or its affiliates. All rights reserved.
+#
+
+ARG BASE_IMAGE=container-registry.oracle.com/os/oraclelinux:7-slim
+
+FROM ${BASE_IMAGE}
+
+LABEL \
+    org.opencontainers.image.url='https://github.com/graalvm/container' \
+    org.opencontainers.image.source='https://github.com/graalvm/container/tree/master/native-image-community' \
+    org.opencontainers.image.title='Native Image Community Edition' \
+    org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
+    org.opencontainers.image.description='GraalVM Native Image Community Edition ahead of time compilation functionality to generate under closed-world assumption an executable image or a shared object. This resulting binary includes the application, the libraries, the JDK and does not run on the Java VM, but includes necessary components like memory management and thread scheduling etc..'
+
+# Note: If you are behind a web proxy, set the build variables for the build:
+#       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
+
+ARG GRAALVM_VERSION=23.0.0
+ARG JAVA_VERSION=20
+ARG YUM_REPO=""
+ARG YUM_REPO_DEFAULT=https://yum.oracle.com/repo/OracleLinux/OL7/graalvm/community/
+ARG TEMP_REGION=""
+
+ENV LANG=en_US.UTF-8 \
+    JAVA_HOME=/usr/lib64/graalvm/graalvm-community-java${JAVA_VERSION}
+
+WORKDIR /app
+
+RUN if [ "$YUM_REPO" == "" ]; then YUM_REPO_CURRENT="$YUM_REPO_DEFAULT\$basearch"; else YUM_REPO_CURRENT="$YUM_REPO"; fi \
+    && echo -e "\
+[ol7_graalvm_community]\n\
+name=Oracle Linux 7 graalvm community (\$basearch)\n\
+baseurl=$YUM_REPO_CURRENT\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle\n\
+gpgcheck=1\n\
+enabled=1\
+" > /etc/yum.repos.d/ol7_graalvm_community.repo \
+    && echo "$TEMP_REGION" > /etc/yum/vars/ociregion \
+    && yum-config-manager --enable ol7_optional_latest \
+    && yum update -y \
+    && yum install -y graalvm-community-${JAVA_VERSION}-native-image \
+    && rm -rf /var/cache/yum \
+    && echo "" > /etc/yum/vars/ociregion \
+    && echo -e "\
+[ol7_graalvm_community]\n\
+name=Oracle Linux 7 graalvm community (\$basearch)\n\
+baseurl=$YUM_REPO_DEFAULT\$basearch\n\
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-oracle\n\
+gpgcheck=1\n\
+enabled=1\
+" > /etc/yum.repos.d/ol7_graalvm_community.repo
+
+ENTRYPOINT [ "native-image" ]
+CMD [ "--version" ]
