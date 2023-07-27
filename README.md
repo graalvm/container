@@ -33,16 +33,16 @@ Note the following images are deprecated and will only receive a last update for
 
 The images are tagged with the format `ghcr.io/graalvm/IMAGE_NAME:java_version`.
 The version tag defines the level of specificity.
-It is recommended that the most specific tag be used, for example, `20.0.1` or `20.0.1-ol9-date`, where the `` means the image required a patch and this specific build will never change.
+It is recommended that the most specific tag be used, for example, `20.0.2` or `20.0.2-ol9-date`, where the `` means the image required a patch and this specific build will never change.
 
 You can pull a package by name or by name and version tag.
 To install GraalVM JDK from the command line, use:
 ```
-$ docker pull ghcr.io/graalvm/jdk-community:20.0.1
+$ docker pull ghcr.io/graalvm/jdk-community:20.0.2
 ```
 To use GraalVM JDK as base image in Dockerfile, use:
 ```
-FROM ghcr.io/graalvm/jdk-community:20.0.1
+FROM ghcr.io/graalvm/jdk-community:20.0.2
 ```
 
 Read more about GraalVM Community Edition container images [here](https://www.graalvm.org/docs/getting-started/container-images/).
@@ -57,9 +57,9 @@ For an RPM-based image, use:
 ghcr.io/graalvm/$IMAGE_NAME[:][$java_version][-$os_version][-$version][-$date]
 ```
 
-For example, `ghcr.io/graalvm/jdk-community:20.0.1-ol9-20230613`.
+For example, `ghcr.io/graalvm/jdk-community:20.0.2-ol9-20230725`.
 You can also set an image to a specific java version that allows an update for a subversion to be pulled.
-For instance, using `ghcr.io/graalvm/jdk-community:latest`, the image will be updated for 23.0.x releases, but not for 23.0.0.   
+For instance, using `ghcr.io/graalvm/jdk-community:latest`, the image will be updated for 23.0.x releases, but not for 23.0.1.   
 Using `ghcr.io/graalvm/native-image-community` you will always get the latest update available for Native Image community, the latest OS which is for now Oracle Linux 9 and Oracle Linux 9 slim, and the latest Java version.
 
 For Standalone-based image, use:
@@ -67,9 +67,9 @@ For Standalone-based image, use:
 ghcr.io/graalvm/$IMAGE_NAME[:][$graalvm_version][-$os_version][-$date]
 ```
 
-For example, `ghcr.io/graalvm/graalvm-community:23.0.0-ol9-20230622`.
+For example, `ghcr.io/graalvm/graalvm-community:23.0.1-ol9-20230725`.
 You can also set an image to a specific java version number that allows an update for a subversion to be pulled.
-For instance, using `ghcr.io/graalvm/nodejs-community:latest`, the image will be updated for 23.0.x releases, but not for 23.0.0.
+For instance, using `ghcr.io/graalvm/nodejs-community:latest`, the image will be updated for 23.0.x releases, but not for 23.0.1.
 Using `ghcr.io/graalvm/nodejs-community` you will always get the latest update available for Node.js, the latest OS which is for now Oracle Linux 9 and Oracle Linux 9 slim, and the latest Java version.
 
 Note some terms and restrictions that may apply to the open source technology.

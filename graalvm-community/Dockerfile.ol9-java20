@@ -21,7 +21,7 @@ RUN microdnf update -y oraclelinux-release-el9 \
 
 RUN fc-cache -f -v
 
-ARG GRAALVM_VERSION=23.0.0
+ARG GRAALVM_VERSION=23.0.1
 ARG JAVA_VERSION=java20
 ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-$JDK_BUILD/graalvm-community-jdk-$JDK_BUILD_GRAALVM_ARCH_bin.tar.gz
 ARG TARGETPLATFORM
