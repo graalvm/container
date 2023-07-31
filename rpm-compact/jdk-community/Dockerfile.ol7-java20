@@ -40,7 +40,7 @@ enabled=1\
 " > /etc/yum.repos.d/ol7_graalvm_community.repo \
     && echo "$TEMP_REGION" > /etc/yum/vars/ociregion \
     && yum update -y \
-    && yum install -y graalvm-community-${JAVA_VERSION}-jdk-${JDK_BUILD} \
+    && yum install -y graalvm-community-${JAVA_VERSION}-jdk \
     && rm -rf /var/cache/yum \
     && echo "" > /etc/yum/vars/ociregion \
     && echo -e "\
