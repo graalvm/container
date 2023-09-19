@@ -21,7 +21,7 @@ RUN microdnf update -y oraclelinux-release-el9 \
 
 RUN fc-cache -f -v
 
-ARG GRAALVM_VERSION=23.0.1
+ARG GRAALVM_VERSION=23.1.0
 ARG JDK_VERSION=17.0.8
 ARG JDK_TAG="+7.1"
 ARG JAVA_VERSION=java17
