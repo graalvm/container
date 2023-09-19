@@ -3,7 +3,7 @@
 # Copyright (c) 2023 Oracle and/or its affiliates. All rights reserved.
 #
 
-ARG GRAALVM_VERSION=23.0.0
+ARG GRAALVM_VERSION=23.0.1
 
 ARG BASE_IMAGE=ghcr.io/graalvm/jdk:ol9-java11-$GRAALVM_VERSION
 

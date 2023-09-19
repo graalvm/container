@@ -14,7 +14,7 @@ LABEL \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='TruffleRuby is the GraalVM high-performance implementation of the Ruby programming language.'
 
-ARG GRAALVM_VERSION=23.0.0
+ARG GRAALVM_VERSION=23.1.0
 ARG TARGETPLATFORM
 ARG GRAALVM_PKG=https://github.com/oracle/truffleruby/releases/download/vm-$GRAALVM_VERSION/truffleruby-$GRAALVM_VERSION-GRAALVM_ARCH.tar.gz
 

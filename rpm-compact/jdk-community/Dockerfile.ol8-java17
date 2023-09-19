@@ -19,7 +19,7 @@ LABEL \
 #       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
 
 
-ARG GRAALVM_VERSION=23.0.0
+ARG GRAALVM_VERSION=23.1.0
 ARG JAVA_VERSION=17
 ARG PLATFORM
 ARG YUM_REPO=""

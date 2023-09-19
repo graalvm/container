@@ -21,13 +21,15 @@ RUN microdnf update -y oraclelinux-release-el9 \
 
 RUN fc-cache -f -v
 
-ARG GRAALVM_VERSION=23.0.0
+ARG GRAALVM_VERSION=23.1.0
+ARG JDK_VERSION=20.0.2
+ARG JDK_TAG="+9.1"
 ARG JAVA_VERSION=java20
-ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-$JDK_BUILD/graalvm-community-jdk-$JDK_BUILD_GRAALVM_ARCH_bin.tar.gz
+ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-${JDK_VERSION}/graalvm-community-jdk-${JDK_VERSION}_GRAALVM_ARCH_bin.tar.gz
 ARG TARGETPLATFORM
 
 ENV LANG=en_US.UTF-8 \
-    JAVA_HOME=/opt/graalvm-community-$JAVA_VERSION
+    JAVA_HOME=/opt/graalvm-community-${JAVA_VERSION}
 
 COPY gu-wrapper.sh /usr/local/bin/gu
 RUN set -eux \
@@ -35,6 +37,7 @@ RUN set -eux \
     && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then GRAALVM_PKG=${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64}; fi \
     && curl --fail --silent --location --retry 3 ${GRAALVM_PKG} \
     | gunzip | tar x -C /opt/ \
+    && mv graalvm-community-openjdk-${JDK_VERSION}${JDK_TAG} ${JAVA_HOME} \
     # Set alternative links
     && mkdir -p "/usr/java" \
     && ln -sfT "$JAVA_HOME" /usr/java/default \

@@ -17,7 +17,7 @@ LABEL \
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
 
-ARG GRAALVM_VERSION=23.0.0
+ARG GRAALVM_VERSION=23.1.0
 ARG JAVA_VERSION=20
 ARG YUM_REPO=""
 ARG YUM_REPO_DEFAULT=https://yum.oracle.com/repo/OracleLinux/OL9/graalvm/community/
@@ -38,11 +38,11 @@ gpgcheck=1\n\
 enabled=1\
 " > /etc/yum.repos.d/ol9_graalvm_community.repo \
     && echo "$TEMP_REGION" > /etc/dnf/vars/ociregion \
-    && microdnf --enablerepo ol9_codeready_builder install -y graalvm${GRAALVM_YEAR_VERSION}-ce-${JAVA_VERSION}-nodejs-devel-${GRAALVM_VERSION} \
+    && microdnf --enablerepo ol9_codeready_builder install -y graalvm-community-${JAVA_VERSION}-nodejs-devel \
     && rm -rf /var/cache/yum \
-    && ln -s /usr/lib64/graalvm/graalvm${GRAALVM_YEAR_VERSION}-ce-java${JAVA_VERSION}/bin/node /usr/local/bin/node \
-    && ln -s /usr/lib64/graalvm/graalvm${GRAALVM_YEAR_VERSION}-ce-java${JAVA_VERSION}/bin/npm /usr/local/bin/npm \
-    && ln -s /usr/lib64/graalvm/graalvm${GRAALVM_YEAR_VERSION}-ce-java${JAVA_VERSION}/bin/npx /usr/local/bin/npx \
+    && ln -s ${JAVA_HOME}/bin/node /usr/local/bin/node \
+    && ln -s ${JAVA_HOME}/bin/npm /usr/local/bin/npm \
+    && ln -s ${JAVA_HOME}/bin/npx /usr/local/bin/npx \
     && echo "" > /etc/dnf/vars/ociregion \
     && echo -e "\
 [ol9_graalvm_community]\n\
