@@ -1,22 +1,27 @@
-# GraalVM Community Edition Container Images
+# GraalVM Container Images
 
-To support container-based development, GraalVM Community Edition container images are published in the GitHub Container Registry for each release.
+To support container-based development, we provide GraalVM container images for each release.
 
+## GraalVM Community Edition Container Images
+
+GraalVM Community Edition container images are published in this GitHub Container Registry.
 There are different GraalVM Community Edition container images provided depending on the architecture and the Java version.
-The images are multi-arch (`aarch64` or `amd64` depending on the host architecture).
-Some images are `GU`-based (containing the [GraalVM Updater](https://github.com/oracle/graal/blob/master/docs/reference-manual/graalvm-updater.md) tool), some are RPM-based.
-All images support the installation of extra features. The following container images are available:
+The container images for the latest GraalVM versions (GraalVM for JDK 17, GraalVM for JDK 20, and GraalVM for JDK 21) have a `-community` suffix. 
+These are: **native-image-community**, **jdk-community**, **truffleruby-community**, **nodejs-community**, and **graalpy-community**.
+The container images are multi-arch, for AMD64 and AArch64 processor architectures. 
 
-| Package      | Description                                                                                                                                                | Type      |
-|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-| jdk-community          | A size compact GraalVM Community Edition container image with the GraalVM JDK pre-installed.                                                                       | RPM-based<sup>1</sup> |
-| graalvm-community   | A GraalVM Community Edition container image with the [`gu` utility](https://www.graalvm.org/reference-manual/graalvm-updater/) to install additional features.                                                          | GU-based  |
-| native-image-community | A size compact GraalVM Community Edition container image with the [Native Image](https://www.graalvm.org/reference-manual/native-image) support.                   | RPM-based<sup>1</sup> |
-| truffleruby-community  | A size compact GraalVM Community Edition container image with the Ruby runtime. It uses a standalone build of [TruffleRuby](https://github.com/oracle/truffleruby/releases). | Standalone<sup>2</sup> |
-| nodejs-community       | A size compact GraalVM Community Edition container image with the [Node.js runtime](https://github.com/oracle/graaljs/blob/master/docs/user/NodeJS.md).                          | RPM-based<sup>1</sup> |
-| graalpy-community       | A size compact GraalVM Community Edition container image with the [GraalPy runtime](https://github.com/oracle/graalpython).                          | Standalone<sup>2</sup> |
+These are GraalVM Community Edition container images for the latest versions:
 
-Note the following images are deprecated and will only receive a last update for 22.3 before being archived
+| Package      | Description    |
+|--------------|----------------|
+| jdk-community          | A size compact GraalVM Community Edition container image with the GraalVM JDK. |
+| graalvm-community   | A GraalVM Community Edition container image.                                                         |
+| native-image-community | A size compact, RPM-based<sup>1</sup>, GraalVM Community Edition container image with the [Native Image](https://www.graalvm.org/reference-manual/native-image) support. |
+| truffleruby-community  | A size compact, standalone<sup>2</sup>, GraalVM Community Edition container image with the Ruby runtime. It uses a standalone build of [TruffleRuby](https://github.com/oracle/truffleruby/releases). |
+| nodejs-community       | A size compact, RPM-based<sup>1</sup>, GraalVM Community Edition container image with the [Node.js runtime](https://github.com/oracle/graaljs/blob/master/docs/user/NodeJS.md). |
+| graalpy-community       | A size compact, standalone<sup>2</sup>, GraalVM Community Edition container image with the [GraalPy runtime](https://github.com/oracle/graalpython). It uses a standalone build of [GraalPy](https://github.com/oracle/graalpython/releases).  |
+
+Below is the list of deprecated images that will only receive a last update for 22.3 before being archived:
 
 | Package      | Description                                                                                                                                                | Type      |
 |--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
@@ -27,22 +32,37 @@ Note the following images are deprecated and will only receive a last update for
 | nodejs       | A size compact GraalVM Community Edition container image with the [Node.js runtime](https://github.com/oracle/graaljs/blob/master/docs/user/NodeJS.md).                          | RPM-based<sup>1</sup> |
 | graalpy       | A size compact GraalVM Community Edition container image with the [GraalPy runtime](https://github.com/oracle/graalpython).                          | Standalone<sup>2</sup> |
 
-**1**: RPM-based GraalVM Community Edition container images are based on GraalVM components RPMs that are available for Oracle Linux 7, Oracle Linux 8 and Oracle Linux 9. Similar to any other available packages, you can install these components using `yum` on Oracle Linux 7 or `microdnf` on the Oracle Linux 8 and Oracle Linux 9 based images.
+**1**: RPM-based GraalVM Community Edition container images are based on GraalVM components RPMs that are available for Oracle Linux 7, Oracle Linux 8, and Oracle Linux 9. Similar to any other available packages, you can install these components using `yum` on Oracle Linux 7, or `microdnf` on Oracle Linux 8 and 9 based images.
 
-**2**: Standalone-based GraalVM Community Edition container images based on standalone builds of specific Truffle languages. These images are created as a drop-in replacement for other implementations (TruffleRuby instead of MRI Ruby), and do not contain a Java runtime.
+**2**: Standalone-based GraalVM Community Edition container images based on standalone builds of specific Truffle languages. These images are created as a drop-in replacement for other implementations, and do not contain a Java runtime.
 
-The images are tagged with the format `ghcr.io/graalvm/IMAGE_NAME:java_version`.
-The version tag defines the level of specificity.
-It is recommended that the most specific tag be used, for example, `20.0.1` or `20.0.1-ol9-date`, where the `` means the image required a patch and this specific build will never change.
+## Tags 
 
-You can pull a package by name or by name and version tag.
-To install GraalVM JDK from the command line, use:
+There are multiple tags that let you choose the level of stability you need including the Java version, build number, and the Linux version. 
+Image tags use the following naming convention:
+
+```bash
+$version[-muslib(for native image only)][-$platform][-$buildnumber]
 ```
-$ docker pull ghcr.io/graalvm/jdk-community:20.0.1
+
+The following tags are listed from the most-specific tag (at the top) to the least-specific tag (at the bottom). 
+The most-specific tag is unique and always points to the same image, while the less-specific tags point to newer image variants over time.
+
+```
+17.0.8-ol9-20230725
+17.0.8-ol9 
+17.0.8 
+17-ol9 
+17
+```
+
+To pull GraalVM for a specific JDK version, for example, 17, run from a command line:
+```
+$ docker pull ghcr.io/graalvm/graalvm-community:17
 ```
 To use GraalVM JDK as base image in Dockerfile, use:
 ```
-FROM ghcr.io/graalvm/jdk-community:20.0.1
+FROM ghcr.io/graalvm/graalvm-community:17
 ```
 
 Read more about GraalVM Community Edition container images [here](https://www.graalvm.org/docs/getting-started/container-images/).
@@ -58,19 +78,22 @@ ghcr.io/graalvm/$IMAGE_NAME[:][$java_version][-$os_version][-$version][-$date]
 ```
 
 For example, `ghcr.io/graalvm/jdk-community:20.0.1-ol9-20230613`.
-You can also set an image to a specific java version that allows an update for a subversion to be pulled.
+
+You can also set an image to a specific Java version that allows an update for a subversion to be pulled.
 For instance, using `ghcr.io/graalvm/jdk-community:latest`, the image will be updated for 23.0.x releases, but not for 23.0.0.   
 Using `ghcr.io/graalvm/native-image-community` you will always get the latest update available for Native Image community, the latest OS which is for now Oracle Linux 9 and Oracle Linux 9 slim, and the latest Java version.
 
-For Standalone-based image, use:
-
+For a standalone image, use:
+```
 ghcr.io/graalvm/$IMAGE_NAME[:][$graalvm_version][-$os_version][-$date]
 ```
 
 For example, `ghcr.io/graalvm/graalvm-community:23.0.0-ol9-20230622`.
-You can also set an image to a specific java version number that allows an update for a subversion to be pulled.
-For instance, using `ghcr.io/graalvm/nodejs-community:latest`, the image will be updated for 23.0.x releases, but not for 23.0.0.
-Using `ghcr.io/graalvm/nodejs-community` you will always get the latest update available for Node.js, the latest OS which is for now Oracle Linux 9 and Oracle Linux 9 slim, and the latest Java version.
 
 Note some terms and restrictions that may apply to the open source technology.
 The container image you select and all of the software that it contains is licensed under one or more open source license that are provided in the container image. Your use of the container is subject to the terms of those licenses.
+
+## Oracle GraalVM Container Images
+
+Oracle GraalVM container images are published in the [Oracle Container Registry](https://container-registry.oracle.com/ords/ocr/ba/graalvm) under the [GraalVM Free Terms and Conditions (GFTC) license](https://www.oracle.com/downloads/licenses/graal-free-license.html). 
+Learn more at [Oracle Help Center](https://docs.oracle.com/en/graalvm/jdk/21/docs/getting-started/container-images/#oracle-graalvm-container-images).
