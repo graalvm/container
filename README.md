@@ -77,10 +77,10 @@ For an RPM-based image, use:
 ghcr.io/graalvm/$IMAGE_NAME[:][$java_version][-$os_version][-$version][-$date]
 ```
 
-For example, `ghcr.io/graalvm/jdk-community:20.0.1-ol9-20230613`.
+For example, `ghcr.io/graalvm/jdk-community:17.0.8-ol9-20230725`.
 
 You can also set an image to a specific Java version that allows an update for a subversion to be pulled.
-For instance, using `ghcr.io/graalvm/jdk-community:latest`, the image will be updated for 23.0.x releases, but not for 23.0.0.   
+For instance, using `ghcr.io/graalvm/jdk-community:latest`, the image will be updated for 23.0.x releases, but not for 23.0.0.
 Using `ghcr.io/graalvm/native-image-community` you will always get the latest update available for Native Image community, the latest OS which is for now Oracle Linux 9 and Oracle Linux 9 slim, and the latest Java version.
 
 For a standalone image, use:
@@ -88,7 +88,7 @@ For a standalone image, use:
 ghcr.io/graalvm/$IMAGE_NAME[:][$graalvm_version][-$os_version][-$date]
 ```
 
-For example, `ghcr.io/graalvm/graalvm-community:23.0.0-ol9-20230622`.
+For example, `ghcr.io/graalvm/graalvm-community:17.0.8-ol9-20230725`.
 
 Note some terms and restrictions that may apply to the open source technology.
 The container image you select and all of the software that it contains is licensed under one or more open source license that are provided in the container image. Your use of the container is subject to the terms of those licenses.
