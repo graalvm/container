@@ -8,7 +8,7 @@ GraalVM Community Edition container images are published in this GitHub Containe
 There are different GraalVM Community Edition container images provided depending on the architecture and the Java version.
 The container images for the latest GraalVM versions (GraalVM for JDK 17, GraalVM for JDK 20, and GraalVM for JDK 21) have a `-community` suffix. 
 These are: **native-image-community**, **jdk-community**, **truffleruby-community**, **nodejs-community**, and **graalpy-community**.
-The container images are multi-arch, for AMD64 and AArch64 processor architectures. 
+The container images are multi-arch, for AMD64 and AArch64 processor architectures, and Linux version.
 
 These are GraalVM Community Edition container images for the latest versions:
 
@@ -81,7 +81,7 @@ For example, `ghcr.io/graalvm/jdk-community:17.0.8-ol9-20230725`.
 
 You can also set an image to a specific Java version that allows an update for a subversion to be pulled.
 For instance, using `ghcr.io/graalvm/jdk-community:latest`, the image will be updated for 23.0.x releases, but not for 23.0.0.
-Using `ghcr.io/graalvm/native-image-community` you will always get the latest update available for Native Image community, the latest OS which is for now Oracle Linux 9 and Oracle Linux 9 slim, and the latest Java version.
+Using `ghcr.io/graalvm/native-image-community` you will always get the latest update available for Native Image GraalVM Community Edition, the latest OS which is for now Oracle Linux 9 and Oracle Linux 9 slim, and the latest Java version.
 
 For a standalone image, use:
 ```
