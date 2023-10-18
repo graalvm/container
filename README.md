@@ -49,20 +49,20 @@ The following tags are listed from the most-specific tag (at the top) to the lea
 The most-specific tag is unique and always points to the same image, while the less-specific tags point to newer image variants over time.
 
 ```
-17.0.8-ol9-20230725
-17.0.8-ol9 
-17.0.8 
-17-ol9 
-17
+21.0.0-ol9-20230919
+21.0.0-ol9
+21.0.0
+21-ol9
+21
 ```
 
-To pull GraalVM for a specific JDK version, for example, 17, run from a command line:
+To pull GraalVM for a specific JDK version, for example, 21, run from a command line:
 ```
-$ docker pull ghcr.io/graalvm/graalvm-community:17
+$ docker pull ghcr.io/graalvm/graalvm-community:21
 ```
 To use GraalVM JDK as base image in Dockerfile, use:
 ```
-FROM ghcr.io/graalvm/graalvm-community:17
+FROM ghcr.io/graalvm/graalvm-community:21
 ```
 
 Read more about GraalVM Community Edition container images [here](https://www.graalvm.org/docs/getting-started/container-images/).
@@ -72,23 +72,14 @@ Read more about GraalVM Community Edition container images [here](https://www.gr
 To allow users to control their update policy, we provide an update policy based on a tag version.
 To fix the image and allow no updates, you need to use a full version with a release date:
 ```
-For an RPM-based image, use:
-
-ghcr.io/graalvm/$IMAGE_NAME[:][$java_version][-$os_version][-$version][-$date]
+ghcr.io/graalvm/$IMAGE_NAME[:][$java_version][-$os_version][-$date]
 ```
 
-For example, `ghcr.io/graalvm/jdk-community:17.0.8-ol9-20230725`.
+For example, `ghcr.io/graalvm/jdk-community:21.0.0-ol9-20230919`.
 
 You can also set an image to a specific Java version that allows an update for a subversion to be pulled.
-For instance, using `ghcr.io/graalvm/jdk-community:latest`, the image will be updated for 23.0.x releases, but not for 23.0.0.
-Using `ghcr.io/graalvm/native-image-community` you will always get the latest update available for Native Image GraalVM Community Edition, the latest OS which is for now Oracle Linux 9 and Oracle Linux 9 slim, and the latest Java version.
-
-For a standalone image, use:
-```
-ghcr.io/graalvm/$IMAGE_NAME[:][$graalvm_version][-$os_version][-$date]
-```
-
-For example, `ghcr.io/graalvm/graalvm-community:17.0.8-ol9-20230725`.
+For instance, using `ghcr.io/graalvm/jdk-community:latest`, the image will be updated for 23.1.x releases, but not for 23.0.0.
+Using `ghcr.io/graalvm/native-image-community` you will always get the latest update available for Native Image GraalVM Community Edition, the latest OS which is now Oracle Linux 9 and Oracle Linux 9 slim, and the latest Java version.
 
 Note some terms and restrictions that may apply to the open source technology.
 The container image you select and all of the software that it contains is licensed under one or more open source license that are provided in the container image. Your use of the container is subject to the terms of those licenses.
