@@ -1,6 +1,13 @@
 # GraalVM Container Images
 
-To support container-based development, we provide GraalVM container images for each release.
+To support container-based development, we provide container images for:
+- Oracle GraalVM
+- GraalVM Community Edition
+
+## Oracle GraalVM Container Images
+
+Oracle GraalVM container images are published in the [Oracle Container Registry](https://container-registry.oracle.com/ords/ocr/ba/graalvm) under the [GraalVM Free Terms and Conditions (GFTC) license](https://www.oracle.com/downloads/licenses/graal-free-license.html). 
+Learn more at [Oracle Help Center](https://docs.oracle.com/en/graalvm/jdk/21/docs/getting-started/container-images/#oracle-graalvm-container-images).
 
 ## GraalVM Community Edition Container Images
 
@@ -83,8 +90,3 @@ Using `ghcr.io/graalvm/native-image-community` you will always get the latest up
 
 Note some terms and restrictions that may apply to the open source technology.
 The container image you select and all of the software that it contains is licensed under one or more open source license that are provided in the container image. Your use of the container is subject to the terms of those licenses.
-
-## Oracle GraalVM Container Images
-
-Oracle GraalVM container images are published in the [Oracle Container Registry](https://container-registry.oracle.com/ords/ocr/ba/graalvm) under the [GraalVM Free Terms and Conditions (GFTC) license](https://www.oracle.com/downloads/licenses/graal-free-license.html). 
-Learn more at [Oracle Help Center](https://docs.oracle.com/en/graalvm/jdk/21/docs/getting-started/container-images/#oracle-graalvm-container-images).
