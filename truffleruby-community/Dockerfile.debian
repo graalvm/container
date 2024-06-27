@@ -16,7 +16,7 @@ LABEL \
 
 ARG GRAALVM_VERSION=23.0.0
 ARG TARGETPLATFORM
-ARG GRAALVM_PKG=https://github.com/oracle/truffleruby/releases/download/vm-$GRAALVM_VERSION/truffleruby-$GRAALVM_VERSION-GRAALVM_ARCH.tar.gz
+ARG GRAALVM_PKG=https://github.com/oracle/truffleruby/releases/download/graal-$GRAALVM_VERSION/truffleruby-community-$GRAALVM_VERSION-GRAALVM_ARCH.tar.gz
 
 WORKDIR /app
 
