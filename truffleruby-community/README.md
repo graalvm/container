@@ -13,9 +13,9 @@ See https://github.com/graalvm/container/pkgs/container/truffleruby-community
 
 * Oracle Linux 9 no toolchain: [`slim`/`slim-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.ol9-slim).
 
-* Oracle Linux 8: [`latest`/`VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.ol8).  
+* Oracle Linux 8: [`ol8`/`ol8-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.ol8).  
 
-* Oracle Linux 8 no toolchain: [`slim`/`slim-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.ol8-slim).  
+* Oracle Linux 8 no toolchain: [`ol8-slim`/`ol8-slim-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.ol8-slim).  
 
 * Oracle Linux 7: [`ol7`/`ol7-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile).  
 
@@ -68,7 +68,7 @@ RUN bundle exec ruby app.rb
 
 ## Installing system packages
 
-### Oracle Linux 8
+### Oracle Linux 8 and 9
 
 Use `microdnf install some-package`.
 

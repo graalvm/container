@@ -18,16 +18,14 @@ LABEL \
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
 
-
-ARG GRAALVM_VERSION=23.0.0
-ARG JAVA_VERSION=17
-ARG PLATFORM
+ARG TARGETPLATFORM
+ARG JDK_MAJOR_VERSION=22
 ARG YUM_REPO=""
 ARG YUM_REPO_DEFAULT=https://yum.oracle.com/repo/OracleLinux/OL8/graalvm/community/
 ARG TEMP_REGION=""
 
 ENV LANG=en_US.UTF-8 \
-    JAVA_HOME=/usr/lib64/graalvm/graalvm-community-java${JAVA_VERSION}
+    JAVA_HOME=/usr/lib64/graalvm/graalvm-community-java${JDK_MAJOR_VERSION}
 
 WORKDIR /app
 
@@ -41,7 +39,7 @@ gpgcheck=1\n\
 enabled=1\
 " > /etc/yum.repos.d/ol8_graalvm_community.repo \
     && echo "$TEMP_REGION" > /etc/dnf/vars/ociregion \
-    && microdnf --enablerepo ol8_codeready_builder install -y graalvm-community-${JAVA_VERSION}-jdk \
+    && microdnf --enablerepo ol8_codeready_builder install -y graalvm-community-${JDK_MAJOR_VERSION}-jdk \
     && rm -rf /var/cache/yum \
     && echo "" > /etc/dnf/vars/ociregion \
     && echo -e "\

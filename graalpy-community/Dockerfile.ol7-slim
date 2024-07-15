@@ -14,19 +14,20 @@ LABEL \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='GraalPy is the GraalVM high-performance implementation of the Python programming language.'
 
-ARG GRAALVM_VERSION=23.0.0
+ARG GRAALVM_VERSION=24.0.1
 ARG GRAALVM_PKG=https://github.com/oracle/graalpython/releases/download/graal-$GRAALVM_VERSION/graalpy-community-$GRAALVM_VERSION-linux-amd64.tar.gz
 ARG TEMP_REGION=""
 
 WORKDIR /app
 
 ENV LANG=en_US.UTF-8 \
-    PATH=/opt/graalpy-$GRAALVM_VERSION/bin:$PATH
+    PATH=/opt/graalpy-$GRAALVM_VERSION/bin:/opt/rh/devtoolset-10/root/usr/bin:$PATH
 
 RUN set -eux \
     && echo "$TEMP_REGION" > /etc/yum/vars/ociregion \
     && yum update -y oraclelinux-release-el7 \
-    && yum install -y curl tar unzip gzip zlib openssl-devel gcc make patch glibc-langpack-en \
+    && yum install -y oracle-softwarecollection-release-el7 \
+    && yum install -y curl tar unzip gzip zlib openssl-devel gcc devtoolset-10-gcc-c++ make patch glibc-langpack-en \
     && echo "" > /etc/yum/vars/ociregion \
     && rm -rf /var/cache/yum
 
@@ -34,7 +35,7 @@ RUN set -eux \
     && mkdir -p /opt/graalpy-$GRAALVM_VERSION \
     && curl --fail --silent --location --retry 3 $GRAALVM_PKG | gunzip | tar x -C /opt/graalpy-$GRAALVM_VERSION --strip-components=1
 
-RUN  graalpy -m venv graalenv && \ 
-    echo "source graalenv/bin/activate" >> ~/.bashrc
+RUN  graalpy -m venv graalenv \
+    && echo "source graalenv/bin/activate" >> ~/.bashrc
 
 CMD [ "graalpy"]
