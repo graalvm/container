@@ -13,7 +13,7 @@ Learn more at [Oracle Help Center](https://docs.oracle.com/en/graalvm/jdk/21/doc
 
 GraalVM Community Edition container images are published in this GitHub Container Registry.
 There are different GraalVM Community Edition container images provided depending on the architecture and the Java version.
-The container images for the latest GraalVM versions (GraalVM for JDK 17, GraalVM for JDK 20, GraalVM for JDK 21, and GraalVM for JDK 22) have a `-community` suffix. 
+The container images for the latest GraalVM versions (GraalVM for JDK 17, GraalVM for JDK 21, and GraalVM for JDK 22) have a `-community` suffix. 
 These are: **native-image-community**, **jdk-community**, **truffleruby-community**, **nodejs-community**, and **graalpy-community**.
 The container images are multi-arch, for AMD64 and AArch64 processor architectures, and Linux version.
 
