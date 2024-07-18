@@ -3,9 +3,7 @@
 # Copyright (c) 2015,2022 Oracle and/or its affiliates. All rights reserved.
 #
 
-ARG GRAALVM_VERSION=23.0.0
-
-ARG BASE_IMAGE=ghcr.io/graalvm/native-image-community:17-ol7
+ARG BASE_IMAGE=ghcr.io/graalvm/native-image-community:22-ol8
 
 FROM ${BASE_IMAGE} as base
 
@@ -27,10 +25,10 @@ ARG ZLIB_LOCATION=https://zlib.net/fossils/zlib-1.2.11.tar.gz
 ENV TOOLCHAIN_DIR=/usr/local/musl \ 
     CC=$TOOLCHAIN_DIR/bin/gcc 
     
-RUN yum-config-manager --disable ol7_graalvm_community \
-    && echo "$TEMP_REGION" > /etc/yum/vars/ociregion \
+RUN echo "$TEMP_REGION" > /etc/dnf/vars/ociregion \
+    && rm -rf /etc/yum.repos.d/ol8_graalvm_community.repo \
     && mkdir -p $TOOLCHAIN_DIR \
-    && yum install -y wget tar gzip make gunzip \
+    && microdnf install -y wget tar gzip make \
     && wget $MUSL_LOCATION && tar -xvf  x86_64-linux-musl-native.tgz -C $TOOLCHAIN_DIR --strip-components=1  \
     && wget $ZLIB_LOCATION && tar -xvf zlib-1.2.11.tar.gz \
     && cd zlib-1.2.11 \
@@ -40,8 +38,7 @@ RUN yum-config-manager --disable ol7_graalvm_community \
 FROM base as final
 COPY --from=muslib /usr/local/musl /usr/local/musl
 
-RUN yum-config-manager --enable ol7_graalvm_community \
-    && echo "" > /etc/yum/vars/ociregion
+RUN echo "" > /etc/dnf/vars/ociregion
 
 ENV TOOLCHAIN_DIR=/usr/local/musl \
     CC=$TOOLCHAIN_DIR/bin/gcc 

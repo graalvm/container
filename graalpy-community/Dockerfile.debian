@@ -14,7 +14,7 @@ LABEL \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='GraalPy is the GraalVM high-performance implementation of the Python programming language.'
 
-ARG GRAALVM_VERSION=23.0.0
+ARG GRAALVM_VERSION=24.0.2
 ARG GRAALVM_PKG=https://github.com/oracle/graalpython/releases/download/graal-$GRAALVM_VERSION/graalpy-community-$GRAALVM_VERSION-linux-amd64.tar.gz
 
 WORKDIR /app
@@ -26,7 +26,7 @@ ENV LANG=en_US.UTF-8 \
 
 RUN set -eux \
     && apt-get update -y \
-    && apt-get install -y locales ca-certificates curl tar gzip libz-dev libssl-dev gcc make unzip patch \
+    && apt-get install -y locales ca-certificates curl tar gzip libz-dev libssl-dev gcc g++ make unzip patch \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -37,7 +37,7 @@ RUN set -eux \
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen \
     && locale-gen
 
-RUN  graalpy -m venv graalenv && \ 
-    echo "source graalenv/bin/activate" >> ~/.bashrc
+RUN graalpy -m venv graalenv \
+    && echo "source graalenv/bin/activate" >> ~/.bashrc
 
 CMD ["graalpy"]

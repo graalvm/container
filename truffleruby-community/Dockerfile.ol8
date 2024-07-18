@@ -14,7 +14,7 @@ LABEL \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='TruffleRuby is the GraalVM high-performance implementation of the Ruby programming language.'
 
-ARG GRAALVM_VERSION=23.0.0
+ARG GRAALVM_VERSION=24.0.2
 ARG TARGETPLATFORM
 ARG GRAALVM_PKG=https://github.com/oracle/truffleruby/releases/download/graal-$GRAALVM_VERSION/truffleruby-community-$GRAALVM_VERSION-GRAALVM_ARCH.tar.gz
 ARG TEMP_REGION=""
@@ -27,12 +27,12 @@ ENV LANG=en_US.UTF-8 \
 RUN set -eux \
     && echo "$TEMP_REGION" > /etc/dnf/vars/ociregion \
     && dnf update -y oraclelinux-release-el8 \
-    && dnf install -y curl tar gzip zlib openssl-devel gcc make glibc-langpack-en \
+    && dnf --enablerepo ol8_codeready_builder install -y curl tar gzip zlib-devel libyaml-devel openssl-devel gcc make glibc-langpack-en \
     && echo "" > /etc/dnf/vars/ociregion \
     && rm -rf /var/cache/yum \
     && mkdir -p /opt/truffleruby-$GRAALVM_VERSION \
     && if [ "$TARGETPLATFORM" == "linux/amd64" ]; then (curl --fail --silent --location --retry 3 ${GRAALVM_PKG/GRAALVM_ARCH/linux-amd64} | gunzip | tar x -C /opt/truffleruby-$GRAALVM_VERSION --strip-components=1) && /opt/truffleruby-$GRAALVM_VERSION/lib/truffle/post_install_hook.sh; fi \
-    && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then (curl --fail --silent --location --retry 3 ${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64} | gunzip | tar x -C /opt/truffleruby-$GRAALVM_VERSION --strip-components=1) && /opt/truffleruby-$GRAALVM_VERSION/lib/truffle/post_install_hook.sh; fi  
-RUN echo "gem: --no-document" > ~/.gemrc
+    && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then (curl --fail --silent --location --retry 3 ${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64} | gunzip | tar x -C /opt/truffleruby-$GRAALVM_VERSION --strip-components=1) && /opt/truffleruby-$GRAALVM_VERSION/lib/truffle/post_install_hook.sh; fi \
+    && echo "gem: --no-document" > ~/.gemrc
 
 CMD [ "irb" ]

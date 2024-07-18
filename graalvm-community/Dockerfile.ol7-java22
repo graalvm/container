@@ -15,7 +15,9 @@ LABEL \
     org.opencontainers.image.title='GraalVM Community Edition' \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='GraalVM is a universal virtual machine for running applications written in JavaScript, Python, Ruby, R, JVM-based languages like Java, Scala, Clojure, Kotlin, and LLVM-based languages such as C and C++.'
-    
+
+ARG TARGETPLATFORM
+
 RUN yum update -y oraclelinux-release-el7 \
     && yum install -y oraclelinux-developer-release-el7 oracle-softwarecollection-release-el7 \
     && yum-config-manager --enable ol7_developer \
@@ -27,20 +29,20 @@ RUN yum update -y oraclelinux-release-el7 \
 
 RUN fc-cache -f -v
 
-ARG GRAALVM_VERSION=23.0.0
-ARG JAVA_VERSION=java20
-ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-$JDK_BUILD/graalvm-community-jdk-$JDK_BUILD_GRAALVM_ARCH_bin.tar.gz
-ARG TARGETPLATFORM
+ARG JDK_MAJOR_VERSION=22
+ARG JDK_VERSION=22.0.2
+ARG JDK_BUILD=+9.1
+ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-${JDK_VERSION}/graalvm-community-jdk-${JDK_VERSION}_GRAALVM_ARCH_bin.tar.gz
 
 ENV LANG=en_US.UTF-8 \
-    JAVA_HOME=/opt/graalvm-community-$JAVA_VERSION
+    JAVA_HOME=/opt/graalvm-community-java$JDK_MAJOR_VERSION
 
-COPY gu-wrapper.sh /usr/local/bin/gu
 RUN set -eux \
     && if [ "$TARGETPLATFORM" == "linux/amd64" ]; then GRAALVM_PKG=${GRAALVM_PKG/GRAALVM_ARCH/linux-x64}; fi \
     && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then GRAALVM_PKG=${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64}; fi \
     && curl --fail --silent --location --retry 3 ${GRAALVM_PKG} \
-    | gunzip | tar x -C /opt/ \
+        | gunzip | tar x -C /opt/ \
+    && mv /opt/graalvm-community-openjdk-$JDK_VERSION$JDK_BUILD $JAVA_HOME \
     # Set alternative links
     && mkdir -p "/usr/java" \
     && ln -sfT "$JAVA_HOME" /usr/java/default \
@@ -49,7 +51,6 @@ RUN set -eux \
         base="$(basename "$bin")"; \
         [ ! -e "/usr/bin/$base" ]; \
         alternatives --install "/usr/bin/$base" "$base" "$bin" 20000; \
-    done \
-    && chmod +x /usr/local/bin/gu
+    done
 
 CMD java -version
