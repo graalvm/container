@@ -3,7 +3,7 @@
 # Copyright (c) 2023 Oracle and/or its affiliates.
 #do
 
-ARG BASE_IMAGE=debian:buster-slim
+ARG BASE_IMAGE=debian:sid-slim
 
 FROM ${BASE_IMAGE}
 
@@ -14,7 +14,7 @@ LABEL \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='GraalPy is the GraalVM high-performance implementation of the Python programming language.'
 
-ARG GRAALVM_VERSION=24.0.2
+ARG GRAALVM_VERSION=24.1.0
 ARG GRAALVM_PKG=https://github.com/oracle/graalpython/releases/download/graal-$GRAALVM_VERSION/graalpy-community-$GRAALVM_VERSION-linux-amd64.tar.gz
 
 WORKDIR /app
