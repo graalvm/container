@@ -14,7 +14,7 @@ LABEL \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='GraalPy is the GraalVM high-performance implementation of the Python programming language.'
 
-ARG GRAALVM_VERSION=24.0.2
+ARG GRAALVM_VERSION=24.1.0
 ARG GRAALVM_PKG=https://github.com/oracle/graalpython/releases/download/graal-$GRAALVM_VERSION/graalpy-community-$GRAALVM_VERSION-linux-amd64.tar.gz
 ARG TEMP_REGION=""
 
@@ -34,7 +34,7 @@ RUN set -eux \
     && mkdir -p /opt/graalpy-$GRAALVM_VERSION \
     && curl --fail --silent --location --retry 3 $GRAALVM_PKG | gunzip | tar x -C /opt/graalpy-$GRAALVM_VERSION --strip-components=1
 
-RUN graalpy -m venv graalenv \ 
+RUN graalpy -m venv graalenv \
     && echo "source graalenv/bin/activate" >> ~/.bashrc
 
 CMD [ "graalpy"]

@@ -3,7 +3,7 @@
 # Copyright (c) 2023 Oracle and/or its affiliates.
 #
 
-ARG BASE_IMAGE=debian:buster-slim
+ARG BASE_IMAGE=debian:sid-slim
 
 FROM ${BASE_IMAGE}
 
@@ -14,7 +14,7 @@ LABEL \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='TruffleRuby is the GraalVM high-performance implementation of the Ruby programming language.'
 
-ARG GRAALVM_VERSION=24.0.2
+ARG GRAALVM_VERSION=24.1.0
 ARG TARGETPLATFORM
 ARG GRAALVM_PKG=https://github.com/oracle/truffleruby/releases/download/graal-$GRAALVM_VERSION/truffleruby-community-$GRAALVM_VERSION-GRAALVM_ARCH.tar.gz
 
