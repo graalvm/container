@@ -14,17 +14,10 @@ The images are intended for use in the **FROM** field of a downstream Dockerfile
 
 # Building the images
 
-For building a GraalVM Java 8 image use:
+For building GraalVM Java 23 amd64 and arm64 images use:
 
 ```
-docker build --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java8 -t ghcr.io/graalvm/graalvm-ce:<GraalVM Version>-java8 .
-```
-
-For building GraalVM Java 17 or Java 20 amd64 and arm64 images use:
-
-```
-docker buildx build --platform linux/amd64 --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java20 -t ghcr.io/graalvm/graalvm-community:<Java Version>-<OS Version>-amd64 --output=type=docker -f Dockerfile.java20 .
-docker buildx build --platform linux/arm64 --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java17 -t ghcr.io/graalvm/graalvm-community:<GraalVM Version>-<OS Version>-arm64 --output=type=docker -f Dockerfile.java17 .
+docker buildx build --platform linux/amd64 --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java23 -t ghcr.io/graalvm/graalvm-community:<Java Version>-<OS Version>-amd64 --output=type=docker -f Dockerfile.<OL Version>-java23 .
 ```
 
 # License
