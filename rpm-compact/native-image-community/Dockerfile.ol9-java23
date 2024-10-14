@@ -18,7 +18,7 @@ LABEL \
 #       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
 
 ARG TARGETPLATFORM
-ARG JDK_MAJOR_VERSION=22
+ARG JDK_MAJOR_VERSION=23
 ARG YUM_REPO=""
 ARG YUM_REPO_DEFAULT=https://yum.oracle.com/repo/OracleLinux/OL9/graalvm/community/
 ARG TEMP_REGION=""
