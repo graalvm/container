@@ -18,6 +18,8 @@ For building GraalVM Java 23 amd64 and arm64 images use:
 
 ```
 docker buildx build --platform linux/amd64 --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java23 -t ghcr.io/graalvm/graalvm-community:<Java Version>-<OS Version>-amd64 --output=type=docker -f Dockerfile.<OL Version>-java23 .
+
+docker buildx build --platform linux/arm64 --build-arg GRAALVM_VERSION=<GraalVM Version> --build-arg JAVA_VERSION=java23 -t ghcr.io/graalvm/graalvm-community:<Java Version>-<OS Version>-arm64 --output=type=docker -f Dockerfile.<OL Version>-java23 .
 ```
 
 # License
