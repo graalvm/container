@@ -24,8 +24,8 @@ RUN microdnf update -y oraclelinux-release-el9 \
 RUN fc-cache -f -v
 
 ARG JDK_MAJOR_VERSION=23
-ARG JDK_VERSION=23.0.1
-ARG JDK_BUILD=+11.1
+ARG JDK_VERSION=23.0.2
+ARG JDK_BUILD=+7.1
 ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-${JDK_VERSION}/graalvm-community-jdk-${JDK_VERSION}_GRAALVM_ARCH_bin.tar.gz
 
 ENV LANG=en_US.UTF-8 \
