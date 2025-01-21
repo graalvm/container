@@ -17,10 +17,6 @@ See https://github.com/graalvm/container/pkgs/container/truffleruby-community
 
 * Oracle Linux 8 no toolchain: [`ol8-slim`/`ol8-slim-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.ol8-slim).  
 
-* Oracle Linux 7: [`ol7`/`ol7-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile).  
-
-* Oracle Linux 7 no toolchain: [`ol7-slim`/`ol7-slim-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.slim).  
-
 * Debian 10: [`debian`/`debian-VERSION`](https://github.com/graalvm/container/blob/master/truffleruby-community/Dockerfile.debian).
 
 The `no toolchain` variants mean the GraalVM LLVM toolchain and its dependencies needed to install C extensions are not included to save space.
@@ -71,10 +67,6 @@ RUN bundle exec ruby app.rb
 ### Oracle Linux 8 and 9
 
 Use `microdnf install some-package`.
-
-### Oracle Linux 7
-
-Use `yum install some-package`.
 
 ### Debian
 

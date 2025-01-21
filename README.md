@@ -39,7 +39,7 @@ Below is the list of deprecated images that will only receive a last update for 
 | nodejs       | A size compact GraalVM Community Edition container image with the [Node.js runtime](https://github.com/oracle/graaljs/blob/master/docs/user/NodeJS.md).                          | RPM-based<sup>1</sup> |
 | graalpy       | A size compact GraalVM Community Edition container image with the [GraalPy runtime](https://github.com/oracle/graalpython).                          | Standalone<sup>2</sup> |
 
-**1**: RPM-based GraalVM Community Edition container images are based on GraalVM components RPMs that are available for Oracle Linux 7, Oracle Linux 8, and Oracle Linux 9. Similar to any other available packages, you can install these components using `yum` on Oracle Linux 7, or `microdnf` on Oracle Linux 8 and 9 based images.
+**1**: RPM-based GraalVM Community Edition container images are based on GraalVM components RPMs that are available for Oracle Linux 8, and Oracle Linux 9. Similar to any other available packages, you can install these components using`microdnf` on Oracle Linux 8 and 9 based images.
 
 **2**: Standalone-based GraalVM Community Edition container images based on standalone builds of specific Truffle languages. These images are created as a drop-in replacement for other implementations, and do not contain a Java runtime.
 
