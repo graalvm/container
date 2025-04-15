@@ -13,7 +13,7 @@ Learn more at [Oracle Help Center](https://docs.oracle.com/en/graalvm/jdk/21/doc
 
 GraalVM Community Edition container images are published in this GitHub Container Registry.
 There are different GraalVM Community Edition container images provided depending on the architecture and the Java version.
-The container images for the latest GraalVM version (GraalVM for JDK 23) have a `-community` suffix. 
+The container images for the latest GraalVM version (GraalVM for JDK 24) have a `-community` suffix. 
 These are: **native-image-community**, **jdk-community**, **truffleruby-community**, **nodejs-community**, and **graalpy-community**.
 The container images are multi-arch, for AMD64 and AArch64 processor architectures, and Linux version.
 
@@ -56,20 +56,20 @@ The following tags are listed from the most-specific tag (at the top) to the lea
 The most-specific tag is unique and always points to the same image, while the less-specific tags point to newer image variants over time.
 
 ```
-23.0.2-ol9-20250121
-23.0.2-ol9
-23.0.2
-23-ol9
-23
+24.0.1-ol9-20250415
+24.0.1-ol9
+24.0.1
+24-ol9
+24
 ```
 
-To pull GraalVM for a specific JDK version, for example, 23, run from a command line:
+To pull GraalVM for a specific JDK version, for example, 24, run from a command line:
 ```
-$ docker pull ghcr.io/graalvm/graalvm-community:23
+$ docker pull ghcr.io/graalvm/graalvm-community:24
 ```
 To use GraalVM JDK as base image in Dockerfile, use:
 ```
-FROM ghcr.io/graalvm/graalvm-community:23
+FROM ghcr.io/graalvm/graalvm-community:24
 ```
 
 Read more about GraalVM Community Edition container images [here](https://www.graalvm.org/docs/getting-started/container-images/).
@@ -82,7 +82,7 @@ To fix the image and allow no updates, you need to use a full version with a rel
 ghcr.io/graalvm/$IMAGE_NAME[:][$java_version][-$os_version][-$date]
 ```
 
-For example, `ghcr.io/graalvm/jdk-community:23.0.2-ol9-20250121`.
+For example, `ghcr.io/graalvm/jdk-community:24.0.1-ol9-20250415`.
 
 You can also set an image to a specific Java version that allows an update for a subversion to be pulled.
 For instance, using `ghcr.io/graalvm/jdk-community:latest`, the image will be updated for 24.1.x releases, but not for 23.0.0.
