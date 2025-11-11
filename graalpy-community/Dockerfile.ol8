@@ -15,7 +15,7 @@ LABEL \
     org.opencontainers.image.description='GraalPy is the GraalVM high-performance implementation of the Python programming language.'
 
 ARG GRAALVM_VERSION=25.0.1
-ARG GRAALVM_PKG=https://github.com/oracle/graalpython/releases/download/graal-$GRAALVM_VERSION/graalpy-community-$GRAALVM_VERSION-linux-amd64.tar.gz
+ARG GRAALVM_PKG=https://github.com/oracle/graalpython/releases/download/graal-$GRAALVM_VERSION/graalpy-community-$GRAALVM_VERSION-GRAALVM_ARCH.tar.gz
 ARG TEMP_REGION=""
 
 WORKDIR /app
@@ -32,7 +32,8 @@ RUN set -eux \
 
 RUN set -eux \
     && mkdir -p /opt/graalpy-$GRAALVM_VERSION \
-    && curl --fail --silent --location --retry 3 $GRAALVM_PKG | gunzip | tar x -C /opt/graalpy-$GRAALVM_VERSION --strip-components=1
+    && if [ "$TARGETPLATFORM" == "linux/amd64" ]; then (curl --fail --silent --location --retry 3 ${GRAALVM_PKG/GRAALVM_ARCH/linux-amd64} | gunzip | tar x -C /opt/graalpy-$GRAALVM_VERSION --strip-components=1) && /opt/graalpy-$GRAALVM_VERSION/lib/truffle/post_install_hook.sh; fi \
+    && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then (curl --fail --silent --location --retry 3 ${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64} | gunzip | tar x -C /opt/graalpy-$GRAALVM_VERSION --strip-components=1) && /opt/graalpy-$GRAALVM_VERSION/lib/truffle/post_install_hook.sh; fi
 
 RUN graalpy -m venv graalenv  \ 
     && echo "source graalenv/bin/activate" >> ~/.bashrc
