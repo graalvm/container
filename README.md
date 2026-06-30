@@ -56,9 +56,9 @@ The following tags are listed from the most-specific tag (at the top) to the lea
 The most-specific tag is unique and always points to the same image, while the less-specific tags point to newer image variants over time.
 
 ```
-25.0.1-ol9-20251021
-25.0.1-ol9
-25.0.1
+25.0.2-ol9-20260120
+25.0.2-ol9
+25.0.2
 25-ol9
 25
 ```
@@ -82,7 +82,7 @@ To fix the image and allow no updates, you need to use a full version with a rel
 ghcr.io/graalvm/$IMAGE_NAME[:][$java_version][-$os_version][-$date]
 ```
 
-For example, `ghcr.io/graalvm/jdk-community:25.0.1-ol9-20251021`.
+For example, `ghcr.io/graalvm/jdk-community:25.0.2-ol9-20260120`.
 
 You can also set an image to a specific Java version that allows an update for a subversion to be pulled.
 For instance, using `ghcr.io/graalvm/jdk-community:latest`, the image will be updated for 24.1.x releases, but not for 25.0.0.
