@@ -21,12 +21,13 @@ ARG TEMP_REGION=""
 WORKDIR /app
 
 ENV LANG=en_US.UTF-8 \
-    PATH=/opt/graalpy-$GRAALVM_VERSION/bin:$PATH
+    PATH=/opt/graalpy-${GRAALVM_VERSION}/bin:/opt/rh/gcc-toolset-12/root/usr/bin:$PATH \
+    LD_LIBRARY_PATH=/opt/rh/gcc-toolset-12/root/usr/lib64:/opt/rh/gcc-toolset-12/root/usr/lib
 
 RUN set -eux \
-    && echo "$TEMP_REGION" > /etc/dnf/vars/ociregion \
+    && echo "${TEMP_REGION}" > /etc/dnf/vars/ociregion \
     && microdnf update -y oraclelinux-release-el8 \
-    && microdnf install -y curl tar unzip gzip zlib openssl-devel gcc gcc-c++ make patch glibc-langpack-en \
+    && microdnf install -y curl tar unzip gzip zlib openssl-devel gcc-toolset-12 make patch glibc-langpack-en \
     && echo "" > /etc/dnf/vars/ociregion \
     && rm -rf /var/cache/dnf
 
