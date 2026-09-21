@@ -1,6 +1,6 @@
 # LICENSE UPL 1.0
 #
-# Copyright (c) 2023 Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2026 Oracle and/or its affiliates. All rights reserved.
 #
 
 ARG BASE_IMAGE=container-registry.oracle.com/os/oraclelinux:9-slim
@@ -18,13 +18,15 @@ LABEL \
 #       E.g.:  docker build --build-arg 'https_proxy=...' --build-arg 'http_proxy=...' --build-arg 'no_proxy=...' ...
 
 ARG TARGETPLATFORM
-ARG JDK_MAJOR_VERSION=25
+ARG EVOLUTION=i4
+ARG JAVA_MAJOR_VERSION=25
+ARG JDK_VERSION=25.0.4.1.1
 ARG YUM_REPO=""
 ARG YUM_REPO_DEFAULT=https://yum.oracle.com/repo/OracleLinux/OL9/graalvm/community/
 ARG TEMP_REGION=""
 
 ENV LANG=en_US.UTF-8 \
-    JAVA_HOME=/usr/lib64/graalvm/graalvm-community-java${JDK_MAJOR_VERSION}
+    JAVA_HOME=/usr/lib64/graalvm/graalvm-community-java${JAVA_MAJOR_VERSION}${EVOLUTION}
 
 WORKDIR /app
 
@@ -38,7 +40,7 @@ gpgcheck=1\n\
 enabled=1\
 " > /etc/yum.repos.d/ol9_graalvm_community.repo \
     && echo "$TEMP_REGION" > /etc/dnf/vars/ociregion \
-    && microdnf --enablerepo ol9_codeready_builder install -y graalvm-community-${JDK_MAJOR_VERSION}-native-image \
+    && microdnf --enablerepo ol9_codeready_builder install -y graalvm-community-${JAVA_MAJOR_VERSION}${EVOLUTION}-native-image-${JDK_VERSION} \
     && rm -rf /var/cache/yum \
     && echo "" > /etc/dnf/vars/ociregion \
     && echo -e "\

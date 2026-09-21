@@ -56,20 +56,20 @@ The following tags are listed from the most-specific tag (at the top) to the lea
 The most-specific tag is unique and always points to the same image, while the less-specific tags point to newer image variants over time.
 
 ```
-25.0.2-ol9-20260120
-25.0.2-ol9
-25.0.2
-25-ol9
-25
+25i4-25.0.4.1.1-ol9-20260922
+25i4-25.0.4.1.1-ol9
+25i4-25.0.4.1.1
+25i4-ol9
+25i4
 ```
 
-To pull GraalVM for a specific JDK version, for example, 25, run from a command line:
+To pull GraalVM for a specific JDK version, for example, 25i4, run from a command line:
 ```
-$ docker pull ghcr.io/graalvm/graalvm-community:25
+$ docker pull ghcr.io/graalvm/graalvm-community:25i4
 ```
 To use GraalVM JDK as base image in Dockerfile, use:
 ```
-FROM ghcr.io/graalvm/graalvm-community:25
+FROM ghcr.io/graalvm/graalvm-community:25i4
 ```
 
 Read more about GraalVM Community Edition container images [here](https://www.graalvm.org/docs/getting-started/container-images/).
@@ -79,14 +79,13 @@ Read more about GraalVM Community Edition container images [here](https://www.gr
 To allow users to control their update policy, we provide an update policy based on a tag version.
 To fix the image and allow no updates, you need to use a full version with a release date:
 ```
-ghcr.io/graalvm/$IMAGE_NAME[:][$java_version][-$os_version][-$date]
+ghcr.io/graalvm/$IMAGE_NAME[:][$java-major-version][$evolution][-$java_version][-$os_version][-$date]
 ```
 
-For example, `ghcr.io/graalvm/jdk-community:25.0.2-ol9-20260120`.
+For example, `ghcr.io/graalvm/jdk-community:25i4-25.0.4.1.1-ol9-20260922`.
 
 You can also set an image to a specific Java version that allows an update for a subversion to be pulled.
-For instance, using `ghcr.io/graalvm/jdk-community:latest`, the image will be updated for 24.1.x releases, but not for 25.0.0.
-Using `ghcr.io/graalvm/native-image-community` you will always get the latest update available for Native Image GraalVM Community Edition, the latest OS which is now Oracle Linux 9 and Oracle Linux 9 slim, and the latest Java version.
+For instance, Using `ghcr.io/graalvm/native-image-community` you will always get the latest update available for Native Image GraalVM Community Edition, the latest OS which is now Oracle Linux 10 and Oracle Linux 10 slim, and the latest Java version.
 
 Note some terms and restrictions that may apply to the open source technology.
 The container image you select and all of the software that it contains is licensed under one or more open source license that are provided in the container image. Your use of the container is subject to the terms of those licenses.

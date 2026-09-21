@@ -1,9 +1,11 @@
 # LICENSE UPL 1.0
 #
-# Copyright (c) 2015,2022 Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015,2026 Oracle and/or its affiliates. All rights reserved.
 #
 
-ARG BASE_IMAGE=ghcr.io/graalvm/native-image-community:25-ol8
+ARG EVOLUTION=i4
+ARG JAVA_MAJOR_VERSION=25
+ARG BASE_IMAGE=ghcr.io/graalvm/native-image-community:${JAVA_MAJOR_VERSION}${EVOLUTION}-ol8
 
 FROM ${BASE_IMAGE} as base
 

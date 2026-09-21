@@ -1,4 +1,4 @@
-# Copyright (c) 2020, 2022 Oracle and/or its affiliates.
+# Copyright (c) 2020, 2026 Oracle and/or its affiliates.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
 
 ARG BASE_IMAGE=container-registry.oracle.com/os/oraclelinux:9-slim
@@ -23,20 +23,22 @@ RUN microdnf update -y oraclelinux-release-el9 \
 
 RUN fc-cache -f -v
 
+ARG EVOLUTION=i4
 ARG JDK_MAJOR_VERSION=25
-ARG JDK_VERSION=25.0.2
-ARG JDK_BUILD=+10.1
-ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-${JDK_VERSION}/graalvm-community-jdk-${JDK_VERSION}_GRAALVM_ARCH_bin.tar.gz
+ARG GRAALVM_VERSION=25.4.4.1.1
+ARG JDK_VERSION=25.0.4.1.1
+ARG JDK_BUILD=+1.1
+ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/graal-${GRAALVM_VERSION}/graalvm-community-jdk-${JDK_MAJOR_VERSION}${EVOLUTION}-${JDK_VERSION}_GRAALVM_ARCH_bin.tar.gz
 
 ENV LANG=en_US.UTF-8 \
-    JAVA_HOME=/opt/graalvm-community-java$JDK_MAJOR_VERSION
+    JAVA_HOME=/opt/graalvm-community-java${JAVA_MAJOR_VERSION}${EVOLUTION}
 
 RUN set -eux \
     && if [ "$TARGETPLATFORM" == "linux/amd64" ]; then GRAALVM_PKG=${GRAALVM_PKG/GRAALVM_ARCH/linux-x64}; fi \
     && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then GRAALVM_PKG=${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64}; fi \
     && curl --fail --silent --location --retry 3 ${GRAALVM_PKG} \
         | gunzip | tar x -C /opt/ \
-    && mv /opt/graalvm-community-openjdk-$JDK_VERSION$JDK_BUILD $JAVA_HOME \
+    && mv /opt/graalvm-community-${GRAALVM_VERSION}${JAVA_BUILD} ${JAVA_HOME} \
     # Set alternative links
     && mkdir -p "/usr/java" \
     && ln -sfT "$JAVA_HOME" /usr/java/default \
