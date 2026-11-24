@@ -1,6 +1,6 @@
 # LICENSE UPL 1.0
 #
-# Copyright (c) 2023 Oracle and/or its affiliates.
+# Copyright (c) 2026 Oracle and/or its affiliates.
 #do
 
 ARG BASE_IMAGE=container-registry.oracle.com/os/oraclelinux:8
@@ -14,19 +14,22 @@ LABEL \
     org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
     org.opencontainers.image.description='GraalPy is the GraalVM high-performance implementation of the Python programming language.'
 
-ARG GRAALVM_VERSION=25.0.2
-ARG GRAALVM_PKG=https://github.com/oracle/graalpython/releases/download/graal-$GRAALVM_VERSION/graalpy-community-$GRAALVM_VERSION-linux-amd64.tar.gz
+ARG GRAALVM_VERSION=25.4.4.1.1
+ARG GRAALVM_VERSION_3_DIGITS=25.4.4
+ARG PYTHON_VERSION=3.13
+ARG GRAALVM_PKG=https://github.com/oracle/graalpython/releases/download/graal-$GRAALVM_VERSION_3_DIGITS/graalpy$PYTHON_VERSION-community-$GRAALVM_VERSION-linux-amd64.tar.gz
 ARG TEMP_REGION=""
 
 WORKDIR /app
 
 ENV LANG=en_US.UTF-8 \
-    PATH=/opt/graalpy-$GRAALVM_VERSION/bin:$PATH
+    PATH=/opt/graalpy-${GRAALVM_VERSION}/bin:/opt/rh/gcc-toolset-12/root/usr/bin:$PATH \
+    LD_LIBRARY_PATH=/opt/rh/gcc-toolset-12/root/usr/lib64:/opt/rh/gcc-toolset-12/root/usr/lib
 
 RUN set -eux \
-    && echo "$TEMP_REGION" > /etc/dnf/vars/ociregion \
+    && echo "${TEMP_REGION}" > /etc/dnf/vars/ociregion \
     && yum update -y oraclelinux-release-el8 \
-    && yum install -y curl tar unzip gzip zlib openssl-devel gcc gcc-c++ make patch glibc-langpack-en \
+    && yum install -y curl tar unzip gzip zlib openssl-devel gcc-toolset-12 make patch glibc-langpack-en \
     && echo "" > /etc/dnf/vars/ociregion \
     && rm -rf /var/cache/yum
 
