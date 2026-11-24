@@ -56,20 +56,20 @@ The following tags are listed from the most-specific tag (at the top) to the lea
 The most-specific tag is unique and always points to the same image, while the less-specific tags point to newer image variants over time.
 
 ```
-25i4-25.0.4.1.1-ol9-20260922
-25i4-25.0.4.1.1-ol9
-25i4-25.0.4.1.1
-25i4-ol9
-25i4
+25i6-25.0.5.1-ol9-20260922
+25i6-25.0.5.1-ol9
+25i6-25.0.5.1
+25i6-ol9
+25i6
 ```
 
-To pull GraalVM for a specific JDK version, for example, 25i4, run from a command line:
+To pull GraalVM for a specific JDK version, for example, 25i6, run from a command line:
 ```
-$ docker pull ghcr.io/graalvm/graalvm-community:25i4
+$ docker pull ghcr.io/graalvm/graalvm-community:25i6
 ```
 To use GraalVM JDK as base image in Dockerfile, use:
 ```
-FROM ghcr.io/graalvm/graalvm-community:25i4
+FROM ghcr.io/graalvm/graalvm-community:25i6
 ```
 
 Read more about GraalVM Community Edition container images [here](https://www.graalvm.org/docs/getting-started/container-images/).
@@ -82,7 +82,7 @@ To fix the image and allow no updates, you need to use a full version with a rel
 ghcr.io/graalvm/$IMAGE_NAME[:][$java-major-version][$evolution][-$java_version][-$os_version][-$date]
 ```
 
-For example, `ghcr.io/graalvm/jdk-community:25i4-25.0.4.1.1-ol9-20260922`.
+For example, `ghcr.io/graalvm/jdk-community:25i6-25.0.5.1-ol9-20260922`.
 
 You can also set an image to a specific Java version that allows an update for a subversion to be pulled.
 For instance, Using `ghcr.io/graalvm/native-image-community` you will always get the latest update available for Native Image GraalVM Community Edition, the latest OS which is now Oracle Linux 10 and Oracle Linux 10 slim, and the latest Java version.
